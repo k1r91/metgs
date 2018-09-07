@@ -1,0 +1,116 @@
+body {
+    margin: 0;
+    padding: 0;
+}
+
+a {
+    text-decoration: none;
+}
+
+div.wrap {
+    background-image: url("../pic/bg_carrot.jpg");
+    min-height: 400px;
+}
+
+div.header-topper {
+    position: absolute;
+    height: 8px;
+    background: #464646;
+    width: 1045px;
+    left: 0;
+    right: 0;
+    margin: 0 auto;
+    z-index: 999;
+}
+
+div.header-topper span.lside {
+    left: -10px;
+    border-top: 8px solid #464646;
+    border-left: 10px solid transparent;
+}
+
+div.header-topper span.rside {
+    right: -10px;
+    border-top: 8px solid #464646;
+    border-right: 10px solid transparent;
+}
+
+div.header-topper span.rside, div.header-topper span.lside {
+    height: 0;
+    width: 0;
+    position: absolute;
+    top: 0;
+}
+
+div.main_menu {
+    width: 100%;
+    height: 60px;
+    overflow: visible;
+    position: absolute;
+    top: 128px;
+    font-family: 'Cuprum', sans-serif;
+    font-size: 12px;
+    font-weight: bold;
+    line-height: normal;
+    margin: 0 auto;
+    margin-bottom: 14px;
+    border-spacing: 1px;
+    text-align: center;
+    z-index: 999;
+}
+
+div.main_menu > div.bg {
+    background: none;
+    width: 1084px;
+    position: relative;
+    z-index: 10;
+    margin: 0 auto;
+}
+
+div.main_menu > div.bg > div.aligner {
+    background: transparent url("../pic/bg_mm.jpg") no-repeat center top;
+    width: 1084px;
+    position: relative;
+    z-index: 10;
+}
+
+div.aligner {
+    margin: 0 auto;
+    height: 100%;
+}
+
+div.main_menu ul {
+    list-style: None;
+    max-width: 100%;
+    background-color: transparent;
+    height: 49px;
+}
+
+div.main_menu li {
+    display: inline;
+    line-height: 60px;
+    margin-right: 12px;
+}
+
+div.main_menu a {
+    color: #ffffff;
+    font-size: 15px;
+}
+
+div.main_menu > div.bg > span.lside {
+    background: url(../pic/bg_mm_lside.png) no-repeat left top;
+    left: -81px;
+}
+
+div.main_menu > div.bg > span.rside {
+    background: url(../pic/bg_mm_rside.png) no-repeat left top;
+    right: -81px;
+}
+
+div.main_menu > div.bg > span.lside, div.main_menu > div.bg > span.rside {
+    position: absolute;
+    width: 126px;
+    height: 62px;
+    z-index: 1;
+    top: 13px;
+}

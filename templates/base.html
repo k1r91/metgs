@@ -1,0 +1,38 @@
+{% load staticfiles %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <link rel="stylesheet" href="{% static "css/base.css" %}"/>
+    <title>ЗАО "МеталлГазСнаб"</title>
+</head>
+<body>
+<div class="wrap">
+    <div class="header">
+        <div class="header-topper">
+            <span class="lside"></span>
+            <span class="rside"></span>
+        </div>
+    </div>
+    <div class="main_menu">
+        <div class="bg">
+            <span class="lside"></span>
+            <div class="aligner">
+                <ul>
+                    {% for menu in menu_list %}
+                        <li>
+                            <a href="/{{ menu.slug }}/">{{ menu.name|capfirst }}</a>
+                        </li>
+                    {% endfor %}
+                </ul>
+            </div>
+            <span class="rside"></span>
+        </div>
+    </div>
+</div>
+
+</body>
+
+</html>
+</body>
+</html>
