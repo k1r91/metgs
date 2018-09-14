@@ -8,25 +8,59 @@
 </head>
 <body>
 <div class="wrap">
-    <div class="header">
-        <div class="header-topper">
-            <span class="lside"></span>
-            <span class="rside"></span>
-        </div>
-    </div>
-    <div class="main_menu">
-        <div class="bg">
-            <span class="lside"></span>
-            <div class="aligner">
-                <ul>
-                    {% for menu in menu_list %}
-                        <li>
-                            <a href="/{{ menu.slug }}/">{{ menu.name|capfirst }}</a>
-                        </li>
-                    {% endfor %}
-                </ul>
+    <div class="bg">
+        <div class="header">
+            <div class="header-topper">
+                <span class="lside"></span>
+                <span class="rside"></span>
             </div>
-            <span class="rside"></span>
+            <div class="main_menu">
+                <div class="bg">
+                    <span class="lside"></span>
+                    <div class="aligner">
+                        <ul>
+                            {% for menu in menu_list %}
+                                <li>
+                                    <a href="/{{ menu.slug }}/">{{ menu.name|upper }}</a>
+                                </li>
+                            {% endfor %}
+                        </ul>
+                    </div>
+                    <span class="rside"></span>
+                </div>
+            </div>
+            <div class="aligner">
+                <div class="bg">
+                    <div class="header-blocks">
+                        <div class="item first">
+                            <span>
+                                <div class="logo">
+                                    <a href="/">
+                                        <img alt="MGS" src="{% static "pic/logo.jpg" %}" />
+                                    </a>
+                                </div>
+                            </span>
+                        </div>
+                        <div class="item second">
+                            <span>
+                                <div class="head-text">
+                                    <span>(343)</span>362-29-00
+                                </div>
+                                <br /><span></span>
+                                <div>
+                                    <a href="/contact/">
+                                        <i class="ico ico-navigate"></i>
+                                        Как к нам добраться?
+                                    </a>
+                                </div>
+                            </span>
+                        </div>
+                        <div class="item third"></div>
+                        <div class="item fourth" style="padding-top:28px;width: 264px"></div>
+                        <div class="item last" id="header-card"></div>
+                    </div>
+                </div>
+            </div>
         </div>
     </div>
 </div>

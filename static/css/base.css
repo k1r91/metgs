@@ -7,9 +7,17 @@ a {
     text-decoration: none;
 }
 
+div {
+    display: block;
+}
+
 div.wrap {
     background-image: url("../pic/bg_carrot.jpg");
     min-height: 400px;
+}
+
+div.header {
+    height: 204px;
 }
 
 div.header-topper {
@@ -75,8 +83,10 @@ div.main_menu > div.bg > div.aligner {
 }
 
 div.aligner {
+    width: 1045px;
     margin: 0 auto;
     height: 100%;
+    position: relative;
 }
 
 div.main_menu ul {
@@ -94,7 +104,7 @@ div.main_menu li {
 
 div.main_menu a {
     color: #ffffff;
-    font-size: 15px;
+    font-size: 13px;
 }
 
 div.main_menu > div.bg > span.lside {
@@ -113,4 +123,88 @@ div.main_menu > div.bg > span.lside, div.main_menu > div.bg > span.rside {
     height: 62px;
     z-index: 1;
     top: 13px;
+}
+
+div.bg {
+    height: 100%;
+    width: 100%;
+}
+
+div.header div.aligner > div.bg {
+    background: #ffffff;
+    position: relative;
+    z-index: 2;
+}
+
+div.header-blocks {
+    width: 100%;
+    position: relative;
+    top: 5px;
+    line-height: 21px;
+    height: 123px;
+    font-size: 14px;
+    font-family: Arial;
+}
+
+div.header-blocks .item.first {
+    padding-left: 40px;
+}
+
+div.header-blocks .item {
+    text-align: center;
+    display: inline-block;
+    float: left;
+    width: 19%;
+    height: auto;
+    padding-top: 27px;
+}
+
+div.header-blocks .item > span {
+    display: inline-block;
+    text-align: left;
+}
+
+div.logo {
+    top: 25px;
+    left: 15px;
+    posotion: absolute;
+    width: 235px;
+    font-size: 20px;
+}
+
+div.logo img {
+    width: 235px;
+}
+
+div.head-text {
+    font-size: 28px;
+    font-family: 'Cuprum', sans-serif;
+}
+
+div.head-text > span {
+    font-size: 70%;
+    padding-right: 2px;
+}
+div.item.second {
+    margin-left: 40px;
+}
+
+i.ico.ico-navigate{
+    background: url("../pic/ico_navigate.png") no-repeat 0 0;
+}
+
+i.ico {
+    width: 19px;
+    height: 16px;
+    display: inline-block;
+    margin-bottom: -3px;
+}
+
+i, cite, em, var, address, dfn {
+    font-style: italic;
+}
+
+div.item.second a {
+    color: forestgreen;
+    text-decoration: underline;
 }
