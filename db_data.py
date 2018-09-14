@@ -1,3 +1,5 @@
+import os
+
 def top_menu():
     data = [
         {"name": "Новости", "slug": "news", "visible": True, "content": None},
@@ -9,4 +11,15 @@ def top_menu():
         {"name": "технокад", "slug": "technocad", "visible": True, "content": None},
         {"name": "контакты", "slug": "contact", "visible": True, "content": None},
     ]
+    return data
+
+
+def organization():
+    data = {
+        "logo": os.path.join("static" , "pic", "logo.jpg"),
+        "phone": "362-29-00",
+        "email": "trachukaf@yandex.ru",
+        "phone_prefix": "343",
+        "contact_text": "как к нам добраться?"
+    }
     return data

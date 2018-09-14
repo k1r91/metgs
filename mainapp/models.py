@@ -7,3 +7,11 @@ class TopMenu(models.Model):
     slug = models.SlugField(unique=True)
     visible = models.BooleanField(default=True)
     content = models.TextField(blank=True, null=True)
+
+
+class Organization(models.Model):
+    logo = models.ImageField(upload_to='logo')
+    phone = models.CharField(max_length=64, blank=True, null=True)
+    phone_prefix = models.CharField(max_length=10, blank=True, null=True)
+    email = models.CharField(max_length=256, blank=True, null=True)
+    contact_text = models.CharField(max_length=128, blank=True, null=True)
