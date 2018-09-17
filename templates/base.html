@@ -3,40 +3,44 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-    <link rel="stylesheet" href="{% static "css/base.css" %}"/>
-    <link rel="stylesheet" href="{% static "css/login.css" %}"/>
-    <link rel="stylesheet" href="{% static "css/bootstrap.min.css" %}"/>
-    <<script src="{% static "js/jquery-3.3.1.min.js" %}"></script>
-    <<script src="{% static "js/base.js" %}"></script>
-    <title>ЗАО "МеталлГазСнаб"</title>
+    {% block styles %}
+        <link rel="stylesheet" href="{% static "css/base.css" %}"/>
+        <link rel="stylesheet" href="{% static "css/bootstrap.min.css" %}"/>
+    {% endblock %}
+    {% block scripts %}
+        <script src="{% static "js/jquery-3.3.1.min.js" %}"></script>
+        <script src="{% static "js/base.js" %}"></script>
+    {% endblock %}
+    {% block title %}
+        <title>ЗАО "МеталлГазСнаб"</title>
+    {% endblock %}
 </head>
 <body>
 <div class="wrap">
-    <div class="bg">
-        <div class="header">
-            <div class="header-topper">
+    <div class="header">
+        <div class="header-topper">
+            <span class="lside"></span>
+            <span class="rside"></span>
+        </div>
+        <div class="main_menu">
+            <div class="bg">
                 <span class="lside"></span>
+                <div class="aligner">
+                    <ul>
+                        {% for menu in menu_list %}
+                            <li>
+                                <a href="/{{ menu.slug }}/">{{ menu.name|upper }}</a>
+                            </li>
+                        {% endfor %}
+                    </ul>
+                </div>
                 <span class="rside"></span>
             </div>
-            <div class="main_menu">
-                <div class="bg">
-                    <span class="lside"></span>
-                    <div class="aligner">
-                        <ul>
-                            {% for menu in menu_list %}
-                                <li>
-                                    <a href="/{{ menu.slug }}/">{{ menu.name|upper }}</a>
-                                </li>
-                            {% endfor %}
-                        </ul>
-                    </div>
-                    <span class="rside"></span>
-                </div>
-            </div>
-            <div class="aligner">
-                <div class="bg">
-                    <div class="header-blocks">
-                        <div class="item first">
+        </div>
+        <div class="aligner">
+            <div class="bg">
+                <div class="header-blocks">
+                    <div class="item first">
                             <span>
                                 <div class="logo">
                                     <a href="/">
@@ -44,8 +48,8 @@
                                     </a>
                                 </div>
                             </span>
-                        </div>
-                        <div class="item second">
+                    </div>
+                    <div class="item second">
                             <span>
                                 <div class="head-text">
                                     <span class="glyphicon glyphicon-earphone"></span><span>({{ organization.phone_prefix }})</span>{{ organization.phone }}
@@ -59,24 +63,34 @@
                                     </a>
                                 </div>
                             </span>
-                        </div>
-                        <div class="item third">
+                    </div>
+                    <div class="item third">
                             <span>
                                 <div class="email">
-                                    <a class="blue" href="mailto:">
+                                    <a class="blue" href="mailto:{{ organization.email }}">
                                         <span class="glyphicon glyphicon-envelope"
                                               style="font-size: 12px; margin-right: 3px;"></span>{{ organization.email }}
                                     </a>
                                 </div>
                             </span>
-                        </div>
-                        <div class="item fourth" style="width: 264px">
-                            <button type="button" id="login" class="btn btn-success btn-xs">
-                                Войти
-                                <span class="glyphicon glyphicon-menu-down"></span>
-                            </button>
-                        </div>
-                        <div class="item last" id="header-card">
+                    </div>
+                    <div class="item fourth" style="width: 264px">
+                        {% if not user.is_authenticated %}
+                            <a href="/login/">
+                                <button type="button" id="login" class="btn btn-success btn-xs">
+                                    Войти
+                                </button>
+                            </a>
+                        {% else %}
+                            <span class="glyphicon glyphicon-user">{{ user.username }}</span>
+                            <a href="/logout/">
+                                <button type="button" id="login" class="btn btn-success btn-xs">
+                                    Выйти
+                                </button>
+                            </a>
+                        {% endif %}
+                    </div>
+                    <div class="item last" id="header-card">
                             <span style="padding-left: 15px;">
                                 <div class="box cart_box">
                                     <div class="basket">
@@ -86,14 +100,40 @@
                                     <div class="lb"></div>
                                 </div>
                             </span>
-                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="bgr">
+        <div class="aligner">
+            <div class="main">
+                {% block content %}
+                {% endblock %}
+            </div>
+        </div>
+    </div>
+    <div class="spacer"></div>
+    <div class="footer">
+        <div class="bgr">
+            <div class="inner">
+                <div class="aligner">
+                    <div class="shadow"></div>
+                    <div class="footer-left">&copy; {% now "Y" %}<br/>{{ organization.footer_desc|safe }}</div>
+                    <div class="footer-center">Наш телефон:
+                        <b>({{ organization.phone_prefix }}) {{ organization.footer_phone }}</b><br/>
+                        Электронная почта: <a
+                                href="mailto:{{ organization.footer_email }}">{{ organization.footer_email }}</a>
+                    </div>
+                    <div class="footer-sticker"></div>
+                    <div class="footer-create"><b><a href="/">{{ organization.name | upper }}</a></b>
                     </div>
                 </div>
             </div>
         </div>
     </div>
 </div>
-{% include "inc_login_form.html" %}
+</div>
 </body>
 
 </html>

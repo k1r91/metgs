@@ -1,11 +1,13 @@
 @import url(https://fonts.googleapis.com/css?family=Roboto:300);
 
-.login-page {
-    width: 360px;
+.error {
+    color: red;
     position: absolute;
-    z-index: 1000;
-    opacity: 0.98;
-    display: none;
+    top: 14px;
+    left: 12%;
+}
+
+.login-page {
 }
 
 .form {

@@ -15,3 +15,7 @@ class Organization(models.Model):
     phone_prefix = models.CharField(max_length=10, blank=True, null=True)
     email = models.CharField(max_length=256, blank=True, null=True)
     contact_text = models.CharField(max_length=128, blank=True, null=True)
+    footer_email = models.EmailField(blank=True, null=True)
+    footer_desc = models.TextField(blank=True, null=True)
+    footer_phone = models.CharField(max_length=64, blank=True, null=True)
+    name = models.CharField(max_length=64, blank=True, null=True)

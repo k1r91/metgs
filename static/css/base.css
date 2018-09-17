@@ -13,11 +13,20 @@ div {
 
 div.wrap {
     background-image: url("../pic/bg_carrot.jpg");
-    min-height: 400px;
+    height: auto !important;
+    min-height: 100%;
+    height: 100%;
+    width: 100%;
+    margin: 0 auto;
+    position: relative;
+    border: 0;
+    font: inherit;
+    font-size: 100%;
+    vertical-align: baseline;
 }
 
 div.header {
-    height: 204px;
+    height: 224px;
 }
 
 div.header-topper {
@@ -265,4 +274,118 @@ div#header-card {
 
 button#login {
     float: left;
+}
+
+span.glyphicon.glyphicon-user {
+    float: left;
+    margin: 2px 2px 0 0;
+}
+
+.footer {
+    position: absolute;
+    left: 0;
+    right: 0;
+    color: #fff;
+    background: none;
+    bottom: 0px;
+    z-index: 2;
+    width: 100%;
+    height: 219px;
+    margin-left: 0;
+    margin-top: 37px;
+    margin-bottom: 0;
+    font-size: 13px;
+}
+
+.footer a {
+    color: #fff;
+}
+
+.footer .bgr {
+    margin: 0 auto;
+    width: 1045px;
+    background: transparent url("../pic/footer_border.png") repeat-x;
+    position: relative;
+    height: 212px;
+    min-height: 100%;
+}
+
+.spacer {
+    width: 100%;
+    height: 212px;
+    clear: both;
+    position: relative;
+    z-index: 1;
+}
+
+.bgr {
+    top: 0;
+    bottom: 53px;
+    right: 0;
+    min-height: 100%;
+    overflow: visible;
+    height: 100%;
+    margin: 0 auto;
+    position: relative;
+    /* box-shadow: 0 0 2px #C9C9C9; */
+    left: 0;
+    width: 1045px;
+    padding-top: 0;
+}
+
+.main {
+    background: #fff;
+    padding: 0;
+    height: 100%;
+}
+
+.footer .inner {
+    height: 212px;
+    background: transparent url(../pic/denim_pattern.png) repeat-x left bottom;
+    position: relative;
+    bottom: -7px;
+}
+
+.footer .shadow {
+    border-top: 2px solid #C75A25;
+    background: url(../pic/footer_shadow.png) no-repeat center -38px;
+    margin: 0 auto;
+    width: 588px;
+    top: 73px;
+    position: relative;
+    height: 74px;
+}
+
+.footer-left {
+    position: absolute;
+    display: inline-block;
+    bottom: 38px;
+    left: 30px;
+    width: 248px;
+}
+
+.footer-center {
+    position: absolute;
+    bottom: 40px;
+    left: 413px;
+    width: 300px;
+}
+
+.footer-sticker {
+    position: absolute;
+    top: 10px;
+    left: 321px;
+    height: 53px;
+    width: 400px;
+    text-align: center;
+}
+
+.footer-create {
+    position: absolute;
+    bottom: 37px;
+    right: 0px;
+    text-align: left;
+    width: 282px;
+    font-size: 11px;
+    line-height: 13px;
 }

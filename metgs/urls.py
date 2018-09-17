@@ -21,7 +21,10 @@ from mainapp.views import *
 
 urlpatterns = [
     # path('admin/', admin.site.urls),
-    path('', index)
+    path('', index),
+    path('login/', login),
+    path('logout/', logout),
+    path('signup/', signup)
 ]
 
 if settings.DEBUG:

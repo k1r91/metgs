@@ -1,5 +1,6 @@
 import os
 
+
 def top_menu():
     data = [
         {"name": "Новости", "slug": "news", "visible": True, "content": None},
@@ -20,6 +21,10 @@ def organization():
         "phone": "362-29-00",
         "email": "trachukaf@yandex.ru",
         "phone_prefix": "343",
-        "contact_text": "как к нам добраться?"
+        "contact_text": "как к нам добраться?",
+        "footer_email": "cherkasov.kirill@gmail.com",
+        "footer_phone": "323-32-18",
+        "footer_desc": "г. Екатеринбург, ул. Монтажников, 32а <br/> ул. Начдива Васильева, 3а",
+        "name": "ЗАО Металлгазснаб",
     }
     return data
