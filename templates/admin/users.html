@@ -37,6 +37,9 @@
                                     <th>
                                         Дата присоединения
                                     </th>
+                                    <th>
+                                        Action
+                                    </th>
                                     </thead>
                                     <tbody>
                                     {% for usr in users %}
@@ -67,6 +70,10 @@
                                             <td>{{ usr.email }}</td>
                                             <td>{{ usr.last_login }}</td>
                                             <td>{{ usr.date_joined }}</td>
+                                            <td><a href="user/edit/{{ usr.pk }}"><span
+                                                    class="glyphicon glyphicon-share"></span></a>
+                                                <a href="user/delete/{{ usr.pk }}"><span
+                                                        class="delete glyphicon glyphicon-ban-circle"></span></a></td>
                                         </tr>
                                     {% endfor %}
                                     </tbody>

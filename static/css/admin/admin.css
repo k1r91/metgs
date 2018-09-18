@@ -1,0 +1,11 @@
+span.glyphicon, td, th {
+    font-size: 1.475rem; !important;
+}
+
+.table thead tr th {
+    font-size: 1.563rem;
+}
+
+.delete {
+    margin-left: 5px;
+}
