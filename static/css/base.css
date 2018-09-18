@@ -389,3 +389,8 @@ span.glyphicon.glyphicon-user {
     font-size: 11px;
     line-height: 13px;
 }
+
+.item.fourth a {
+    float: left;
+    margin: 2px 2px 0 0;
+}

@@ -1,0 +1,13 @@
+{% extends 'signup.html' %}
+{% load staticfiles %}
+{% block inner-form %}
+    {% if user.is_active %}
+        <p style="color: green">
+            Добро пожаловать, {{ user.username }}! <a href="/">Перейти на главную.</a>
+        </p>
+    {% else %}
+        <p style="color: green">
+            Письмо с подтверждением активации отправлено на ваш email <a href="mailto:{{ email }}">{{ email }}.</a>
+        </p>
+    {% endif %}
+{% endblock %}

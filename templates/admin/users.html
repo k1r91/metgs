@@ -1,0 +1,84 @@
+{% extends 'admin/base.html' %}
+{% block content %}
+    <div class="content">
+        <div class="container-fluid">
+            <div class="row">
+                <div class="col-md-12">
+                    <div class="card">
+                        <div class="card-header card-header-primary">
+                            <h4 class="card-title ">Таблица пользователей</h4>
+                            <p class="card-category">Редактируйте пользователей</p>
+                        </div>
+                        <div class="card-body">
+                            <div class="table-responsive">
+                                <table class="table">
+                                    <thead class=" text-primary">
+                                    <th>
+                                        ID
+                                    </th>
+                                    <th>
+                                        Имя пользователся
+                                    </th>
+                                    <th>
+                                        Активен
+                                    </th>
+                                    <th>
+                                        Суперюзер
+                                    </th>
+                                    <th>
+                                        Сотрудник
+                                    </th>
+                                    <th>
+                                        Email
+                                    </th>
+                                    <th>
+                                        Последний логин
+                                    </th>
+                                    <th>
+                                        Дата присоединения
+                                    </th>
+                                    </thead>
+                                    <tbody>
+                                    {% for usr in users %}
+                                        <tr>
+                                            <td>{{ usr.pk }}</td>
+                                            <td>{{ usr.username }}</td>
+                                            <td>
+                                                {% if usr.is_active %}
+                                                    Да
+                                                {% else %}
+                                                    Нет
+                                                {% endif %}
+                                            </td>
+                                            <td>
+                                                {% if usr.is_superuser %}
+                                                    Да
+                                                {% else %}
+                                                    Нет
+                                                {% endif %}
+                                            </td>
+                                            <td>
+                                                {% if usr.is_staff %}
+                                                    Да
+                                                {% else %}
+                                                    Нет
+                                                {% endif %}
+                                            </td>
+                                            <td>{{ usr.email }}</td>
+                                            <td>{{ usr.last_login }}</td>
+                                            <td>{{ usr.date_joined }}</td>
+                                        </tr>
+                                    {% endfor %}
+                                    </tbody>
+                                </table>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+{% endblock %}
+{% block title_inside %}
+    Пользователи
+{% endblock %}

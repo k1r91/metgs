@@ -1,8 +1,6 @@
 import os
 import django
 from django.core.files.images import ImageFile
-from django.core.mail import EmailMessage
-from django.template.loader import render_to_string
 os.environ.setdefault("DJANGO_SETTINGS_MODULE", "metgs.settings")
 django.setup()
 import db_data
@@ -29,19 +27,7 @@ def fill_organization():
     print('Organization created.')
 
 
-def test_send_email():
-    mail_subject = 'Активация вашего аккаунта на metgs.ru'
-    message = render_to_string('acc_active_email.html', {
-        'user': 'asd',
-        'domain': 'metgs.ru',
-        'uid': 'testuid',
-        'token': 'testtoken',
-    })
-    to_email = 'cherkasov.kirill-1@yandex.ru'
-    email = EmailMessage(mail_subject, message, to=[to_email])
-    email.send()
-
 if __name__ == '__main__':
-    # fill_top_menu()
-    # fill_organization()
-    # test_send_email()
+    fill_top_menu()
+    fill_organization()
+    pass
