@@ -1,0 +1,34 @@
+{% for usr in users %}
+    <tr>
+        <td>{{ usr.pk }}</td>
+        <td>{{ usr.username }}</td>
+        <td>
+            {% if usr.is_active %}
+                Да
+            {% else %}
+                Нет
+            {% endif %}
+        </td>
+        <td>
+            {% if usr.is_superuser %}
+                Да
+            {% else %}
+                Нет
+            {% endif %}
+        </td>
+        <td>
+            {% if usr.is_staff %}
+                Да
+            {% else %}
+                Нет
+            {% endif %}
+        </td>
+        <td>{{ usr.email }}</td>
+        <td>{{ usr.last_login }}</td>
+        <td>{{ usr.date_joined }}</td>
+        <td><a href="#edit-form" onclick="fill_form({{ usr.pk }})"><span
+                class="glyphicon glyphicon-share"></span></a>
+            <a href="user/delete/{{ usr.pk }}"><span
+                    class="delete glyphicon glyphicon-ban-circle"></span></a></td>
+    </tr>
+{% endfor %}

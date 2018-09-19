@@ -1,16 +1,20 @@
 import os
 from django.contrib.auth.models import User
-from django.shortcuts import render, HttpResponseRedirect
+from django.shortcuts import render, HttpResponseRedirect, get_object_or_404
 from django.contrib import auth
 from django.contrib.sites.shortcuts import get_current_site
-from django.http import Http404, HttpResponse
+from django.http import Http404, HttpResponse, JsonResponse
 from django.template.loader import render_to_string
 from django.core.mail import EmailMessage, EmailMultiAlternatives
 from django.utils.http import urlsafe_base64_encode, urlsafe_base64_decode
 from django.utils.encoding import force_bytes, force_text
+from django.template import loader
+from django.template.context_processors import csrf
 from mainapp.models import *
-from mainapp.forms import SignUpForm
+from mainapp.forms import SignUpForm, UserEditFrom
 from mainapp.get_token import account_activation_token
+
+
 # Create your views here.
 
 def get_common_context():
@@ -79,7 +83,7 @@ def signup(request):
 
 
 def activate(request, uidb64, token):
-    uidb64 = uidb64[2:-1]   # removing quotes and bytes
+    uidb64 = uidb64[2:-1]  # removing quotes and bytes
     try:
         uid = force_text(urlsafe_base64_decode(uidb64))
         user = User.objects.get(pk=uid)
@@ -97,9 +101,36 @@ def activate(request, uidb64, token):
 
 def admin(request):
     user = request.user
+    if not user.is_superuser:
+        raise Http404
     users = User.objects.all()
     context = dict()
     context['users'] = users
-    if not user.is_superuser:
-        raise Http404
-    return render(request, os.path.join('admin', 'users.html'), context)
+    if request.method == 'GET':
+        edit_form = UserEditFrom()
+        context['edit_form'] = edit_form
+        return render(request, os.path.join('admin', 'users.html'), context)
+    elif request.method == 'POST':
+        id = request.POST.get('id')
+        print(id)
+        if id:
+            user = get_object_or_404(User, id=id)
+            form = UserEditFrom(request.POST or None, instance=user)
+            if form.is_valid():
+                form.save()
+                return HttpResponseRedirect('/admin/')
+    else:
+        return render(request, os.path.join('admin', 'users.html'), context)
+
+
+def get_user_form(request, id):
+    if request.is_ajax():
+        if not request.user.is_superuser:
+            raise Http404
+        user = get_object_or_404(User, id=id)
+        form = UserEditFrom(instance=user)
+        context = {'edit_form': form, 'id': id}
+        context.update(csrf(request))
+        html = loader.render_to_string('admin/inc_user_edit_form.html', context)
+        data = {'errors': False, 'html': html}
+        return JsonResponse(data)

@@ -1,4 +1,9 @@
 {% extends 'admin/base.html' %}
+{% load staticfiles %}
+{% block styles %}
+    {{ block.super }}
+    <link rel="stylesheet" href="{% static "css/login.css" %}"/>
+{% endblock %}
 {% block content %}
     <div class="content">
         <div class="container-fluid">
@@ -42,40 +47,7 @@
                                     </th>
                                     </thead>
                                     <tbody>
-                                    {% for usr in users %}
-                                        <tr>
-                                            <td>{{ usr.pk }}</td>
-                                            <td>{{ usr.username }}</td>
-                                            <td>
-                                                {% if usr.is_active %}
-                                                    Да
-                                                {% else %}
-                                                    Нет
-                                                {% endif %}
-                                            </td>
-                                            <td>
-                                                {% if usr.is_superuser %}
-                                                    Да
-                                                {% else %}
-                                                    Нет
-                                                {% endif %}
-                                            </td>
-                                            <td>
-                                                {% if usr.is_staff %}
-                                                    Да
-                                                {% else %}
-                                                    Нет
-                                                {% endif %}
-                                            </td>
-                                            <td>{{ usr.email }}</td>
-                                            <td>{{ usr.last_login }}</td>
-                                            <td>{{ usr.date_joined }}</td>
-                                            <td><a href="user/edit/{{ usr.pk }}"><span
-                                                    class="glyphicon glyphicon-share"></span></a>
-                                                <a href="user/delete/{{ usr.pk }}"><span
-                                                        class="delete glyphicon glyphicon-ban-circle"></span></a></td>
-                                        </tr>
-                                    {% endfor %}
+                                    {% include 'admin/inc_users_list.html' %}
                                     </tbody>
                                 </table>
                             </div>
@@ -84,8 +56,15 @@
                 </div>
             </div>
         </div>
+        <div id="edit-form">
+            {% include 'admin/inc_user_edit_form.html' %}
+        </div>
     </div>
 {% endblock %}
 {% block title_inside %}
     Пользователи
+{% endblock %}
+{% block scripts %}
+    {{ block.super }}
+    <script src="{% static "/js/admin/users.js" %}"></script>
 {% endblock %}

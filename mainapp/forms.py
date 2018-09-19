@@ -10,10 +10,25 @@ def validate_email_unique(value):
         raise ValidationError("Пользователь с таким email уже зарегистрирован.")
 
 
-class SignUpForm(UserCreationForm):
+def validate_id_unique(value):
+    exists = User.objects.filter(id=value)
+    if exists and exists[0].is_active:
+        raise ValidationError("Пользователь с таким id уже зарегистрирован.")
 
+
+class SignUpForm(UserCreationForm):
     email = forms.EmailField(max_length=200, validators=[validate_email_unique])
 
     class Meta:
         model = User
         fields = ['username', 'email', 'password1', 'password2']
+
+
+class UserEditFrom(UserCreationForm):
+    id = forms.IntegerField(label='ID', widget=forms.TextInput(attrs={'id': 'user_id'}))
+    email = forms.EmailField(max_length=200)
+    is_active = forms.BooleanField(label="Активен", required=False)
+
+    class Meta:
+        model = User
+        fields = ['id', 'username', 'is_superuser', 'is_staff', 'is_active', 'email', 'password1', 'password2']

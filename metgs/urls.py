@@ -26,7 +26,8 @@ urlpatterns = [
     path('logout/', logout),
     path('signup/', signup),
     path('activate/<uidb64>/<token>', activate, name='activate'),
-    path('admin/', admin)
+    path('admin/', admin),
+    path('admin/get_user_form/<id>/', get_user_form)
 ]
 
 if settings.DEBUG:

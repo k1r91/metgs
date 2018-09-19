@@ -9,3 +9,14 @@ span.glyphicon, td, th {
 .delete {
     margin-left: 5px;
 }
+
+.h4, h4, .card {
+    font-size: 1.765rem;
+}
+.navbar .navbar-brand {
+    font-size: 1.825rem;
+}
+
+.navbar>.container-fluid .navbar-brand {
+    margin-left: 2px;
+}
