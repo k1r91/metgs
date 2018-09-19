@@ -1,5 +1,18 @@
 $(document).ready(function () {
     var csrf_token = $('input[name=csrfmiddlewaretoken]').val()
+
+    function csrfSafeMethod(method) {
+        // these HTTP methods do not require CSRF protection
+        return (/^(GET|HEAD|OPTIONS|TRACE)$/.test(method));
+    }
+
+    $.ajaxSetup({
+        beforeSend: function (xhr, settings) {
+            if (!csrfSafeMethod(settings.type) && !this.crossDomain) {
+                xhr.setRequestHeader("X-CSRFToken", csrf_token);
+            }
+        }
+    });
     $("body").on("click", "#btn-cancel", function (e) {
         $("tr.add").removeClass('hidden')
         $("tr.edit").addClass('hidden')
@@ -36,7 +49,7 @@ $(document).ready(function () {
             url: '/admin/user/add/',
             type: 'POST',
             dataType: 'json',
-            data: {"csrfmiddlewaretoken": csrf_token},
+            data: requestData,
             success:
                 function (response) {
                     if (response.errors) {

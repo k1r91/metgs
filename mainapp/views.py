@@ -154,7 +154,7 @@ def add_user(request):
         context['edit_form'] = form
         if form.is_valid():
             form.save()
-            html = loader.render_to_string('admin/inc_users_list', context)
+            html = loader.render_to_string('admin/inc_users_list.html', context)
             data = {'errors': False, 'html': html}
             return JsonResponse(data)
         else:
