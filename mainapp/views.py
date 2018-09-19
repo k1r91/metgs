@@ -138,7 +138,7 @@ def get_user_form(request, id):
         return JsonResponse(data)
 
 
-@csrf_exempt
+# @csrf_exempt
 def add_user(request):
     if request.is_ajax():
         context = {}

@@ -1,4 +1,6 @@
 $(document).ready(function () {
+    var csrf_token = '"' + $('input[name=csrfmiddlewaretoken]').val() + '"'
+    // console.log($('input[name=csrfmiddlewaretoken]').val())
     $("body").on("click", "#btn-cancel", function (e) {
         $("tr.add").removeClass('hidden')
         $("tr.edit").addClass('hidden')
@@ -30,19 +32,22 @@ $(document).ready(function () {
     $("body").on("submit", "#edit-form", function (e) {
         e.preventDefault()
         // e.target.checkValidity()
+        var requestData = JSON.stringify($('form#edit-form').serializeArray())
+        var sendData = requestData.substring(0, requestData.length - 1) + ',{"csrfmiddlewaretoken":' + csrf_token + "}]"
+        console.log(sendData)
         $.ajax({
             url: '/admin/user/add/',
             type: 'POST',
             dataType: 'json',
-            data: JSON.stringify($('form#edit-form').serializeArray()),
-            success: function (response) {
-                if (response.errors) {
-                    console.log(response.html)
-                    $('#edit-form').html(response.html)
-                } else {
-                    console.log(response.html)
-                }
-            },
+            data: sendData,
+            success:
+                function (response) {
+                    if (response.errors) {
+                        $('#edit-form').html(response.html)
+                    } else {
+                        console.log(response.html)
+                    }
+                },
             error: function (xhr, status, error) {
                 console.log("error = ", error)
             }
