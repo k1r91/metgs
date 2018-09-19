@@ -1,6 +1,5 @@
 $(document).ready(function () {
-    var csrf_token = '"' + $('input[name=csrfmiddlewaretoken]').val() + '"'
-    // console.log($('input[name=csrfmiddlewaretoken]').val())
+    var csrf_token = $('input[name=csrfmiddlewaretoken]').val()
     $("body").on("click", "#btn-cancel", function (e) {
         $("tr.add").removeClass('hidden')
         $("tr.edit").addClass('hidden')
@@ -33,13 +32,11 @@ $(document).ready(function () {
         e.preventDefault()
         // e.target.checkValidity()
         var requestData = JSON.stringify($('form#edit-form').serializeArray())
-        var sendData = requestData.substring(0, requestData.length - 1) + ',{"csrfmiddlewaretoken":' + csrf_token + "}]"
-        console.log(sendData)
         $.ajax({
             url: '/admin/user/add/',
             type: 'POST',
             dataType: 'json',
-            data: sendData,
+            data: {"csrfmiddlewaretoken": csrf_token},
             success:
                 function (response) {
                     if (response.errors) {
