@@ -1,4 +1,5 @@
 import os
+import json
 from django.contrib.auth.models import User
 from django.shortcuts import render, HttpResponseRedirect, get_object_or_404
 from django.contrib import auth
@@ -13,6 +14,7 @@ from django.template.context_processors import csrf
 from mainapp.models import *
 from mainapp.forms import SignUpForm, UserEditFrom
 from mainapp.get_token import account_activation_token
+from django.views.decorators.csrf import csrf_exempt
 
 
 # Create your views here.
@@ -134,3 +136,28 @@ def get_user_form(request, id):
         html = loader.render_to_string('admin/inc_user_edit_form.html', context)
         data = {'errors': False, 'html': html}
         return JsonResponse(data)
+
+
+@csrf_exempt
+def add_user(request):
+    if request.is_ajax():
+        context = {}
+        data = json.loads(request.body.decode())
+        form_data = {}
+        for item in data:
+            if item["name"] == "id":
+                continue
+            form_data[item["name"]] = item["value"]
+        print(form_data)
+        form = UserEditFrom(form_data)
+        context['users'] = User.objects.all()
+        context['edit_form'] = form
+        if form.is_valid():
+            form.save()
+            html = loader.render_to_string('admin/inc_users_list', context)
+            data = {'errors': False, 'html': html}
+            return JsonResponse(data)
+        else:
+            html = loader.render_to_string('admin/inc_user_edit_form.html', context)
+            data = {'errors': True, 'html': html}
+            return JsonResponse(data)

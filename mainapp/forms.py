@@ -25,7 +25,7 @@ class SignUpForm(UserCreationForm):
 
 
 class UserEditFrom(UserCreationForm):
-    id = forms.IntegerField(label='ID', widget=forms.TextInput(attrs={'id': 'user_id'}))
+    id = forms.IntegerField(label='', widget=forms.HiddenInput(attrs={'id': 'user_id'}), required=False)
     email = forms.EmailField(max_length=200)
     is_active = forms.BooleanField(label="Активен", required=False)
 

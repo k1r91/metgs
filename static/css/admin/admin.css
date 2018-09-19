@@ -20,3 +20,14 @@ span.glyphicon, td, th {
 .navbar>.container-fluid .navbar-brand {
     margin-left: 2px;
 }
+
+td {
+    width: 50%;
+}
+table {
+    width: 100%;
+}
+
+.hidden {
+    display: none;
+}

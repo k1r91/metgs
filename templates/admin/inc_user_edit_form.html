@@ -9,13 +9,25 @@
                         <td>{{ field.label_tag }}</td>
                         <td>{{ field }}</td>
                         {% for error in field.errors %}
-                            <p style="color: red">{{ error }}</p>
+                            <p class="errors" style="color: red">{{ error }}</p>
                         {% endfor %}
                     </tr>
                 {% endfor %}
+                <tr class="add">
+                    <td colspan="2">
+                        <button id="btn-add" type="submit" class="btn btn-success">ДОБАВИТЬ</button>
+                    </td>
+                </tr>
+                <tr class="edit hidden">
+                    <td>
+                        <button id="btn-edit" type="submit" class="btn btn-success">СОХРАНИТЬ</button>
+                    </td>
+                    <td>
+                        <button id="btn-cancel" class="btn btn-danger">ОТМЕНА</button>
+                    </td>
+                </tr>
                 </tbody>
             </table>
-            <button id="save" type="submit">СОХРАНИТЬ</button>
         </form>
     </div>
 </div>
