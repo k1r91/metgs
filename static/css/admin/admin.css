@@ -1,5 +1,6 @@
 span.glyphicon, td, th {
-    font-size: 1.475rem; !important;
+    font-size: 1.475rem;
+!important;
 }
 
 .table thead tr th {
@@ -13,21 +14,44 @@ span.glyphicon, td, th {
 .h4, h4, .card {
     font-size: 1.765rem;
 }
+
 .navbar .navbar-brand {
     font-size: 1.825rem;
 }
 
-.navbar>.container-fluid .navbar-brand {
+.navbar > .container-fluid .navbar-brand {
     margin-left: 2px;
 }
 
 td {
     width: 50%;
 }
+
 table {
     width: 100%;
 }
 
 .hidden {
     display: none;
+}
+
+div#user-delete {
+    position: absolute;
+    top: 0;
+    left: 0;
+    z-index: 1000;
+    /*border: 1px solid black;*/
+    background-color: #fff;
+    font-size: 1.475rem;
+    text-align: center;
+    padding: 10px 5px 10px 5px;
+    -webkit-box-shadow: 9px 9px 13px -6px rgba(0, 0, 0, 0.75);
+    -moz-box-shadow: 9px 9px 13px -6px rgba(0, 0, 0, 0.75);
+    box-shadow: 9px 9px 13px -6px rgba(0, 0, 0, 0.75);
+    border: 1px solid lightgrey;
+}
+
+div#user-delete button {
+    width: 35%;
+    margin: 0 auto;
 }

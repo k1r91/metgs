@@ -138,18 +138,23 @@ def get_user_form(request, id):
         return JsonResponse(data)
 
 
-# @csrf_exempt
 def add_user(request):
     if request.is_ajax():
         context = {}
         data = json.loads(request.body.decode())
+        print(data)
         form_data = {}
         for item in data:
             if item["name"] == "id":
-                continue
+                if item["value"] == "":
+                    continue
             form_data[item["name"]] = item["value"]
-        print(form_data)
-        form = UserEditFrom(form_data)
+        # print(form_data)
+        if form_data.get("id"):
+            user = User.objects.get(id=form_data.get('id'))
+            form = UserEditFrom(form_data, instance=user)
+        else:
+            form = UserEditFrom(form_data)
         context['users'] = User.objects.all()
         context['edit_form'] = form
         if form.is_valid():
@@ -161,3 +166,34 @@ def add_user(request):
             html = loader.render_to_string('admin/inc_user_edit_form.html', context)
             data = {'errors': True, 'html': html}
             return JsonResponse(data)
+
+
+def get_user(request, id):
+    data = {}
+    try:
+        user = User.objects.get(id=id)
+        data['errors'] = False
+    except User.DoesNotExist:
+        data['errors'] = True
+    html = loader.render_to_string('admin/inc_user_delete.html', {'user_delete': user})
+    data['html'] = html
+    return JsonResponse(data)
+
+
+def delete_user(request):
+    if not request.user.is_superuser:
+        raise Http404
+    data = json.loads(request.body.decode())
+    response = {}
+    try:
+        user = User.objects.get(id=data['id'])
+        response['errors'] = False
+        user.delete()
+    except User.DoesNotExist:
+        data['errors'] = True
+        response['errors'] = True
+    context = {'users': User.objects.all()}
+    html = loader.render_to_string('admin/inc_users_list.html', context)
+    response['html'] = html
+    return JsonResponse(response)
+

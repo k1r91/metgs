@@ -28,7 +28,7 @@
         <td>{{ usr.date_joined }}</td>
         <td><a href="#edit-form" onclick="fill_form({{ usr.pk }})"><span
                 class="glyphicon glyphicon-edit"></span></a>
-            <a href="user/delete/{{ usr.pk }}"><span
-                    class="delete glyphicon glyphicon-ban-circle"></span></a></td>
+            <a role="button" href="#" class="href-delete" onclick="show_delete_dialog({{ usr.pk }})"><span
+                    class="glyphicon glyphicon-ban-circle"></span></a></td>
     </tr>
 {% endfor %}

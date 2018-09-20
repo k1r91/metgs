@@ -1,4 +1,11 @@
+var currentMousePos = {x: -1, y: -1};
+$(document).mousemove(function (event) {
+    currentMousePos.x = event.pageX;
+    currentMousePos.y = event.pageY;
+});
+
 $(document).ready(function () {
+
     var csrf_token = $('input[name=csrfmiddlewaretoken]').val()
 
     function csrfSafeMethod(method) {
@@ -55,7 +62,8 @@ $(document).ready(function () {
                     if (response.errors) {
                         $('#edit-form').html(response.html)
                     } else {
-                        console.log(response.html)
+                        $('tbody#users-list').html(response.html)
+                        flush_form()
                     }
                 },
             error: function (xhr, status, error) {
@@ -89,4 +97,52 @@ function fill_form(id) {
 function flush_form() {
     $("input").val('')
     $("input[type=checkbox]").prop("checked", false)
+    $('p.errors').html('')
+}
+
+
+function show_delete_dialog(id) {
+    $.ajax({
+        url: 'get_user/' + id,
+        type: 'GET',
+        dataType: 'json',
+        success: function (response, event) {
+            if (response.errors) {
+                console.log("errors = ", errors);
+            } else {
+                $('div#user-delete').html(response.html)
+                $("div#user-delete").removeClass('hidden')
+                $("div#user-delete").css({"top": currentMousePos.y + 20, "left": currentMousePos.x - 200})
+            }
+        },
+        error: function (xhr, status, error) {
+            console.log("error = ", error)
+        }
+    })
+}
+
+function hide_user_delete_form() {
+    $('div#user-delete').addClass('hidden')
+}
+
+function delete_user(id) {
+    hide_user_delete_form()
+    $.ajax({
+        url: 'delete_user/',
+        type: 'POST',
+        dataType: 'json',
+        data: JSON.stringify({'id': id}),
+        success: function (response, event) {
+            if (response.errors) {
+                console.log("errors = ", errors);
+            } else {
+                $('tbody#users-list').html(response.html)
+                hide_user_delete_form()
+                flush_form()
+            }
+        },
+        error: function (xhr, status, error) {
+            console.log("error = ", error)
+        }
+    })
 }

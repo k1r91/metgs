@@ -1,10 +1,3 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <title>$Title$</title>
-</head>
-<body>
-$END$
-</body>
-</html>
+<p>Вы уверены, что хотите удалить пользователя {{ user_delete.username }}, id: {{ user_delete.pk }}?</p>
+<button id="btn-ok-delete" class="btn btn-success" onclick="delete_user({{ user_delete.pk }})">Да</button>
+<button id="btn-cancel-delete" class="btn btn-danger" onclick="hide_user_delete_form()">Отмена</button>
