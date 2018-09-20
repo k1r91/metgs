@@ -149,7 +149,7 @@ def add_user(request):
                 if item["value"] == "":
                     continue
             form_data[item["name"]] = item["value"]
-        # print(form_data)
+        print(form_data)
         if form_data.get("id"):
             user = User.objects.get(id=form_data.get('id'))
             form = UserEditFrom(form_data, instance=user)

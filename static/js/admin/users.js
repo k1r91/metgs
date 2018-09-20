@@ -95,7 +95,7 @@ function fill_form(id) {
 }
 
 function flush_form() {
-    $("input").val('')
+    $("input[type=password], input[type=text], input[type=email]").val('')
     $("input[type=checkbox]").prop("checked", false)
     $('p.errors').html('')
 }
