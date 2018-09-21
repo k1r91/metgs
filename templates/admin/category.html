@@ -3,43 +3,89 @@
 {% block styles %}
     {{ block.super }}
 {% endblock %}
-
 {% block content %}
     <div class="content">
-    <div class="container-fluid">
-        <div class="row">
-            <div class="col-md-12">
-                <div class="card">
-                    <div class="card-header card-header-primary">
-                        <h4 class="card-title ">Таблица категорий</h4>
-                        <p class="card-category">Редактируйте категории</p>
-                    </div>
-                    <div class="card-body">
-                        <div class="table-responsive">
-                            <table class="table">
-                                <thead class=" text-primary">
-                                <th>Наименование</th>
-                                <th>Описание</th>
-                                <th>Изображение</th>
-                                <th style="min-width: 300px;">Сопутствующие категории</th>
-                                <th>Действие</th>
-                                </thead>
-                                <tbody id="users-list">
-                                {% for category in categories %}
-                                    <tr>
-                                    <td>{{ category.name }}</td>
-                                    <td>{{ category.desc }}</td>
-                                    <td>{% if category.image %}
-                                        <img src="{{ category.image.url }}" style="width: 100px;"/>
+        <div class="container-fluid">
+            <div class="row">
+                <div class="col-md-12">
+                    <div class="card">
+                        <div class="card-header card-header-primary">
+                            <h4 class="card-title ">Таблица категорий</h4>
+                            <p class="card-category">Редактируйте категории</p>
+                        </div>
+                        <div class="card-body">
+                            <div class="table-responsive">
+                                <table class="table">
+                                    <thead class=" text-primary">
+                                    <th>Наименование</th>
+                                    <th style="min-width: 500px;">Описание</th>
+                                    <th>Изображение</th>
+                                    <th>Сопутствующие категории</th>
+                                    <th>Количество товаров</th>
+                                    <th>Действие</th>
+                                    </thead>
+                                    <tbody id="users-list">
+                                    {% for category in categories %}
+                                        <tr>
+                                            <td>{{ category.name | capfirst }}</td>
+                                            <td id="category-desc{{ category.id }}">
+                                                <div id="short-{{ category.id }}">{{ category.short_desc | safe }}...</div>
+                                                <div id="long-{{ category.id }}"
+                                                     class="hidden">{{ category.desc | safe }}</div>
+                                                <button id="btn-show-{{ category.id }}" style="width:103px;"
+                                                        class="btn btn-sm btn-default"
+                                                        onclick="show_desc({{ category.id }})">
+                                                    показать полностью
+                                                </button>
+                                                <button id="btn-hide-{{ category.id }}" style="width:103px;"
+                                                        class="btn btn-sm btn-default hidden"
+                                                        onclick="hide_desc({{ category.id }})">
+                                                    скрыть
+                                                </button>
+
+                                            </td>
+                                            <td>{% if category.image %}
+                                                <img src="{{ category.image.url }}" style="width: 100px;"/>
+                                            {% else %}
+                                                Нет изображения
+                                            {% endif %}
+                                            </td>
+                                            <td>{{ category.related }}</td>
+                                            <td></td>
+                                            <td><a href="/admin/category/edit/{{ category.id }}/"><span
+                                                    class="glyphicon glyphicon-edit"></span></a>
+                                                <a href="/admin/category/delete/{{ category.id }}/"><span
+                                                        class="glyphicon glyphicon-ban-circle"></span></a></td>
+                                        </tr>
+                                    {% endfor %}
+                                    </tbody>
+                                </table>
+                                <div class="pagination">
+                                <span class="step-links">
+                                        <a {% if categories.has_previous %}
+                                            href="?page={{ categories.previous_page_number }}"
                                         {% else %}
-                                        Нет изображения
-                                        {% endif %}
-                                    </td>
-                                    <td>{{ category.related }}</td>
-                                    </tr>
-                                {% endfor %}
-                                </tbody>
-                            </table>
+                                            href="#" class="disabled"
+                                        {% endif %}>
+                                                <span class="glyphicon glyphicon-circle-arrow-left"></span>
+                                            </a>
+                                    <span class="current">
+                                        Страница {{ categories.number }} из {{ categories.paginator.num_pages }}
+                                    </span>
+                                        <a{% if categories.has_next %}
+                                            href="?page={{ categories.next_page_number }}"
+                                        {% else %}
+                                            href="#" class="disabled"
+                                        {% endif %}>
+                                            <span class="glyphicon glyphicon-circle-arrow-right"></span>
+                                        </a>
+                                </span>
+                                    <div class="goto-page">
+                                        <label for="goto-page">Перейти на страницу:</label><input id="goto-page" />
+                                        <a href="/" ><button class="btn btn-primary btn-md">вперёд</button></a>
+                                    </div>
+                                </div>
+                            </div>
                         </div>
                     </div>
                 </div>
@@ -53,4 +99,5 @@
 {% endblock %}
 {% block scripts %}
     {{ block.super }}
+    <script type="text/javascript" src="{% static "/js/admin/category.js" %}"></script>
 {% endblock %}

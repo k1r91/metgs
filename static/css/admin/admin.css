@@ -1,6 +1,18 @@
-span.glyphicon, td, th {
+td, th {
     font-size: 1.475rem;
 !important;
+}
+span.glyphicon {
+    font-size: 2.5rem; !important;
+    margin-right: 5px;
+}
+
+span.glyphicon-edit {
+    color: #398439;
+}
+
+span.glyphicon-ban-circle {
+    color: #a21309;
 }
 
 .table thead tr th {
@@ -54,4 +66,22 @@ div#user-delete {
 div#user-delete button {
     width: 35%;
     margin: 0 auto;
+}
+
+a.disabled {
+    cursor: not-allowed;
+    pointer-events: none;
+    color: #383d41;
+    opacity: .5;
+}
+span.glyphicon.glyphicon-circle-arrow-left, span.glyphicon.glyphicon-circle-arrow-right {
+    font-size: 2rem;
+}
+
+.goto-page {
+    margin-left: 40px;
+}
+
+.goto-page > * {
+    margin-right: 5px;
 }

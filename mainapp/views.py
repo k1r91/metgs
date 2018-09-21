@@ -14,6 +14,7 @@ from django.template.context_processors import csrf
 from mainapp.models import *
 from mainapp.forms import SignUpForm, UserEditFrom
 from mainapp.get_token import account_activation_token
+from django.core.paginator import Paginator, EmptyPage, PageNotAnInteger
 from django.views.decorators.csrf import csrf_exempt
 
 
@@ -203,6 +204,16 @@ def admin_category(request):
     if not request.user.is_staff:
         raise Http404
     categories = Category.objects.all()
-    headers = [f.name for f in Category._meta.get_fields()]
-    return render(request, 'admin/category.html', {'categories': categories, 'headers': headers})
+    paginator = Paginator(categories, 5)
+    page = request.GET.get('page')
+    try:
+        categories = paginator.page(page)
+    except PageNotAnInteger:
+        categories = paginator.page(1)
+    except EmptyPage:
+        categories = paginator.page(paginator.num_pages)
+    for cat in categories:
+        desc = cat.desc.split(' ')
+        cat.short_desc = ' '.join(desc[:15])
+    return render(request, 'admin/category.html', {'categories': categories})
 
