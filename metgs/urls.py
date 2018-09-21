@@ -14,7 +14,7 @@ Including another URLconf
     2. Add a URL to urlpatterns:  path('blog/', include('blog.urls'))
 """
 from django.contrib import admin
-from django.urls import path, re_path
+from django.urls import path, re_path, include
 from django.conf import settings
 from django.conf.urls.static import static
 from mainapp.views import *
@@ -30,7 +30,9 @@ urlpatterns = [
     path('admin/get_user_form/<id>/', get_user_form),
     path('admin/user/add/', add_user),
     path('admin/get_user/<id>/', get_user),
-    path('admin/delete_user/', delete_user)
+    path('admin/delete_user/', delete_user),
+    path('admin/category/', admin_category),
+    path('tinymce/', include('tinymce.urls'),),
 ]
 
 if settings.DEBUG:

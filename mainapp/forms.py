@@ -2,6 +2,7 @@ from django import forms
 from django.core.exceptions import ValidationError
 from django.contrib.auth.forms import UserCreationForm
 from django.contrib.auth.models import User
+from mainapp.models import *
 
 
 def validate_email_unique(value):
@@ -32,3 +33,10 @@ class UserEditFrom(UserCreationForm):
     class Meta:
         model = User
         fields = ['id', 'username', 'is_superuser', 'is_staff', 'is_active', 'email', 'password1', 'password2']
+
+
+class CategoryForm(forms.ModelForm):
+
+    class Meta:
+        model = Category
+        fields = '__all__'

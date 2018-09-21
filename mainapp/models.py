@@ -1,4 +1,7 @@
 from django.db import models
+from tinymce.models import HTMLField
+
+
 # Create your models here.
 
 
@@ -19,3 +22,21 @@ class Organization(models.Model):
     footer_desc = models.TextField(blank=True, null=True)
     footer_phone = models.CharField(max_length=64, blank=True, null=True)
     name = models.CharField(max_length=64, blank=True, null=True)
+
+
+class Category(models.Model):
+    name = models.CharField(max_length=128, unique=True, verbose_name="Наименование")
+    desc = HTMLField(blank=True, null=True, verbose_name="Описание")
+    image = models.ImageField(upload_to='category', blank=True, null=True, verbose_name="Изображение")
+    related = models.ForeignKey('self', blank=True, null=True, on_delete=models.PROTECT,
+                                verbose_name="Близкие категории")
+
+
+class Good(models.Model):
+    category = models.ForeignKey(Category, on_delete=models.CASCADE, blank=True, null=True)
+    image = models.ImageField(upload_to='good')
+    name = models.CharField(max_length=128, unique=True)
+    price = models.IntegerField(blank=True, null=True)
+    desc = models.TextField(blank=True, null=True)
+    sub_desc = HTMLField(blank=True, null=True)
+    related = models.ForeignKey('self', blank=True, null=True, on_delete=models.PROTECT)

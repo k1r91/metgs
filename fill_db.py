@@ -27,7 +27,23 @@ def fill_organization():
     print('Organization created.')
 
 
+def fill_categories():
+    Category.objects.all().delete()
+    data = db_data.category()
+    for item in data:
+        try:
+            image = ImageFile(open(item.pop('image'), 'rb'))
+            cat = Category(**item)
+            cat.image = image
+        except KeyError:
+            cat = Category(**item)
+        finally:
+            cat.save()
+    print('Categories created.')
+
+
 if __name__ == '__main__':
     fill_top_menu()
     fill_organization()
+    fill_categories()
     pass

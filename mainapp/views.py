@@ -20,9 +20,10 @@ from django.views.decorators.csrf import csrf_exempt
 # Create your views here.
 
 def get_common_context():
+    categories = Category.objects.all()
     menu_list = TopMenu.objects.all()
     organization = Organization.objects.all()[0]
-    return {'organization': organization, 'menu_list': menu_list}
+    return {'organization': organization, 'menu_list': menu_list, 'categories': categories}
 
 
 def index(request):
@@ -196,4 +197,12 @@ def delete_user(request):
     html = loader.render_to_string('admin/inc_users_list.html', context)
     response['html'] = html
     return JsonResponse(response)
+
+
+def admin_category(request):
+    if not request.user.is_staff:
+        raise Http404
+    categories = Category.objects.all()
+    headers = [f.name for f in Category._meta.get_fields()]
+    return render(request, 'admin/category.html', {'categories': categories, 'headers': headers})
 

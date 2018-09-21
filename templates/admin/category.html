@@ -1,0 +1,56 @@
+{% extends 'admin/base.html' %}
+{% load staticfiles %}
+{% block styles %}
+    {{ block.super }}
+{% endblock %}
+
+{% block content %}
+    <div class="content">
+    <div class="container-fluid">
+        <div class="row">
+            <div class="col-md-12">
+                <div class="card">
+                    <div class="card-header card-header-primary">
+                        <h4 class="card-title ">Таблица категорий</h4>
+                        <p class="card-category">Редактируйте категории</p>
+                    </div>
+                    <div class="card-body">
+                        <div class="table-responsive">
+                            <table class="table">
+                                <thead class=" text-primary">
+                                <th>Наименование</th>
+                                <th>Описание</th>
+                                <th>Изображение</th>
+                                <th style="min-width: 300px;">Сопутствующие категории</th>
+                                <th>Действие</th>
+                                </thead>
+                                <tbody id="users-list">
+                                {% for category in categories %}
+                                    <tr>
+                                    <td>{{ category.name }}</td>
+                                    <td>{{ category.desc }}</td>
+                                    <td>{% if category.image %}
+                                        <img src="{{ category.image.url }}" style="width: 100px;"/>
+                                        {% else %}
+                                        Нет изображения
+                                        {% endif %}
+                                    </td>
+                                    <td>{{ category.related }}</td>
+                                    </tr>
+                                {% endfor %}
+                                </tbody>
+                            </table>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+{% endblock %}
+
+{% block title_inside %}
+    Категории
+{% endblock %}
+{% block scripts %}
+    {{ block.super }}
+{% endblock %}
