@@ -12,7 +12,7 @@ from django.utils.encoding import force_bytes, force_text
 from django.template import loader
 from django.template.context_processors import csrf
 from mainapp.models import *
-from mainapp.forms import SignUpForm, UserEditFrom
+from mainapp.forms import SignUpForm, UserEditFrom, CategoryForm
 from mainapp.get_token import account_activation_token
 from django.core.paginator import Paginator, EmptyPage, PageNotAnInteger
 from django.views.decorators.csrf import csrf_exempt
@@ -200,7 +200,7 @@ def delete_user(request):
     return JsonResponse(response)
 
 
-def admin_category(request):
+def admin_category(request, lpage=False):
     if not request.user.is_staff:
         raise Http404
     categories = Category.objects.all()
@@ -212,8 +212,25 @@ def admin_category(request):
         categories = paginator.page(1)
     except EmptyPage:
         categories = paginator.page(paginator.num_pages)
+    if lpage:
+        categories = paginator.page(paginator.num_pages)
     for cat in categories:
         desc = cat.desc.split(' ')
         cat.short_desc = ' '.join(desc[:15])
     return render(request, 'admin/category.html', {'categories': categories})
 
+
+def add_category(request):
+    if not request.user.is_staff:
+        raise Http404
+    if request.method == 'GET':
+        form = CategoryForm()
+        return render(request, 'admin/category_add.html', {'form': form})
+    elif request.method == 'POST':
+        form = CategoryForm(request.POST, request.FILES)
+        if form.is_valid():
+            form.save()
+            return admin_category(request, lpage=True)
+        else:
+            print("SYBHERE")
+            return render(request, 'admin/category_add.html', {'form': form})

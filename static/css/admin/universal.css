@@ -1,0 +1,20 @@
+#form-submit {
+    float: right;
+    margin-right: 10px;
+}
+
+#form-cancel {
+    float: left;
+    margin-left: 10px;
+}
+
+#form-submit, #form-cancel {
+    width: 150px;
+    font-size: 1.5rem;
+}
+
+#upload-img {
+    width: 150px;
+}
+
+.scrollable { border:2px solid #ccc; width:300px; height: 200px; overflow-y: scroll; }

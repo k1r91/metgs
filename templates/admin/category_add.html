@@ -1,0 +1,19 @@
+{% extends 'admin/base.html' %}
+{% load staticfiles %}
+{% block title_inside %} Форма для добавления категории {% endblock %}
+{% block content %}
+    <div class="content">
+        <div class="container-fluid">
+            <div class="container-fluid">
+                <div class="card card-plain">
+                    <div class="card-header card-header-primary">
+                        <h4 class="card-title">Добавить категорию</h4>
+                    </div>
+                    <div class="form">
+                        {% include 'admin/universal_form.html' %}
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+{% endblock %}

@@ -133,3 +133,9 @@ EMAIL_HOST = 'smtp.gmail.com'
 EMAIL_HOST_USER = 'cherkasov.kirill@gmail.com'
 EMAIL_HOST_PASSWORD = 'dncornho775741Ehuekn102'
 EMAIL_PORT = 587
+
+TINYMCE_DEFAULT_CONFIG = {
+    'theme': "advanced",
+    'width' : 450,
+    'height': 300,
+}

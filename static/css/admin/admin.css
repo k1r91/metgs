@@ -85,3 +85,6 @@ span.glyphicon.glyphicon-circle-arrow-left, span.glyphicon.glyphicon-circle-arro
 .goto-page > * {
     margin-right: 5px;
 }
+div.form {
+    margin: 2% auto;
+}

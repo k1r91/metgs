@@ -36,6 +36,11 @@ class UserEditFrom(UserCreationForm):
 
 
 class CategoryForm(forms.ModelForm):
+    # related = forms.ModelMultipleChoiceField(
+    #     required=False,
+    #     label="Сопутствующие категории",
+    #     queryset=Category.objects.all(),
+    #     widget=forms.CheckboxSelectMultiple)
 
     class Meta:
         model = Category

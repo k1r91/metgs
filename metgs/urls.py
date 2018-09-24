@@ -32,7 +32,9 @@ urlpatterns = [
     path('admin/get_user/<id>/', get_user),
     path('admin/delete_user/', delete_user),
     path('admin/category/', admin_category),
-    path('tinymce/', include('tinymce.urls'),),
+    path('admin/category/add/', add_category),
+    path('tinymce/', include('tinymce.urls')),
+    re_path(r'^tinymce/', include('tinymce.urls')),
 ]
 
 if settings.DEBUG:

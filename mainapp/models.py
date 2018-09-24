@@ -29,7 +29,10 @@ class Category(models.Model):
     desc = HTMLField(blank=True, null=True, verbose_name="Описание")
     image = models.ImageField(upload_to='category', blank=True, null=True, verbose_name="Изображение")
     related = models.ForeignKey('self', blank=True, null=True, on_delete=models.PROTECT,
-                                verbose_name="Близкие категории")
+                                verbose_name="Сопутствующие категории")
+
+    def __str__(self):
+        return self.name
 
 
 class Good(models.Model):
@@ -37,6 +40,6 @@ class Good(models.Model):
     image = models.ImageField(upload_to='good')
     name = models.CharField(max_length=128, unique=True)
     price = models.IntegerField(blank=True, null=True)
-    desc = models.TextField(blank=True, null=True)
-    sub_desc = HTMLField(blank=True, null=True)
+    desc = HTMLField(blank=True, null=True)
+    sub_desc = models.TextField(blank=True, null=True)
     related = models.ForeignKey('self', blank=True, null=True, on_delete=models.PROTECT)
