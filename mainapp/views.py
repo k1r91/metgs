@@ -1,7 +1,7 @@
 import os
 import json
 from django.contrib.auth.models import User
-from django.shortcuts import render, HttpResponseRedirect, get_object_or_404
+from django.shortcuts import render, HttpResponseRedirect, get_object_or_404, redirect
 from django.contrib import auth
 from django.contrib.sites.shortcuts import get_current_site
 from django.http import Http404, HttpResponse, JsonResponse
@@ -217,6 +217,7 @@ def admin_category(request, lpage=False):
     for cat in categories:
         desc = cat.desc.split(' ')
         cat.short_desc = ' '.join(desc[:15])
+        cat.related_cats = cat.related.all()
     return render(request, 'admin/category.html', {'categories': categories})
 
 
@@ -234,3 +235,42 @@ def add_category(request):
         else:
             print("SYBHERE")
             return render(request, 'admin/category_add.html', {'form': form})
+
+
+def edit_category(request, _id):
+    if not request.user.is_staff:
+        raise Http404
+    category = get_object_or_404(Category, id=_id)
+    if request.method == 'GET':
+        form = CategoryForm(instance=category)
+        return render(request, 'admin/category_edit.html', {'form': form, 'obj': category})
+    elif request.method == 'POST':
+        form = CategoryForm(request.POST, request.FILES, instance=category)
+        if form.is_valid():
+            form.save()
+            return admin_category(request, lpage=True)
+        else:
+            return render(request, 'admin/category_edit.html', {'form': form, 'obj': category})
+
+
+def get_category(request, id):
+    category = get_object_or_404(Category, id=id)
+    context = {'category': category}
+    html = loader.render_to_string('admin/inc_category_delete.html', context)
+    response = {'html': html, 'id': id}
+    return JsonResponse(response)
+
+
+def delete_category(request, _id):
+    """
+    delete category object and redirect to previous pagination view, to certain page
+    :param request:
+    :param _id:
+    :return:
+    """
+    if request.method == 'POST':
+        if request.user.is_superuser:
+            category = get_object_or_404(Category, id=_id)
+            category.delete()
+            return HttpResponseRedirect(request.META.get('HTTP_REFERER'))
+    raise Http404

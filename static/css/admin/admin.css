@@ -88,3 +88,18 @@ span.glyphicon.glyphicon-circle-arrow-left, span.glyphicon.glyphicon-circle-arro
 div.form {
     margin: 2% auto;
 }
+
+#category-delete-container {
+    border: 1px solid lightgray;
+    position: absolute;
+    top: 0;
+    left: 0;
+    z-index: 1000;
+    background-color: #fff;
+    text-align: center;
+}
+
+#category-delete-container button, #category-delete-container a {
+    margin: 0 auto;
+    width: 47%;
+}

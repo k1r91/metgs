@@ -8,33 +8,28 @@
         <tbody>
         {% for field in form %}
             <tr>
-                <td>{{ field.label }}</td>
+                <td class="field-label">{{ field.label }}</td>
                 <td>
-{#                    {% if field.name == 'image' %}#}
-{#                        <label for="id_image" class="btn btn-primary">выберите файл</label>#}
-{#                        <div class="hidden">{{ field }}</div>#}
-{#                        <img id="upload-img" alt="файл не выбран"/>#}
-{#                    {% elif field.name == 'related' %}#}
-{#                        <div class="scrollable">#}
-{#                            {{ field }}#}
-{#                        </div>#}
-{#                    {% else %}#}
-{#                        {{ field }}#}
-{#                    {% endif %}#}
-                    {{ field }}
+                    {% if field.name == 'image' %}
+                        <label for="id_image" class="btn btn-primary">выберите файл</label>
+                        <div class="hidden">{{ field }}</div>
+                        <img src="{{ obj.image.url }}" id="upload-img" alt="файл не выбран"/>
+                    {% elif field.name == 'related' %}
+                        <div class="scrollable">
+                            {{ field }}
+                        </div>
+                    {% else %}
+                        {{ field }}
+                    {% endif %}
                 </td>
             </tr>
             <tr style="height: 10px;"></tr>
         {% endfor %}
         <tr>
-            <td><input id="form-submit" class="btn btn-success" type="submit" value="добавить"></td>
-            <td>
-                <a href="/admin/category/">
-                    <button id="form-cancel" class="btn btn-danger">отмена</button>
-                </a>
-            </td>
+            <td><input id="form-submit" class="btn btn-success" type="submit" value="ok"></td>
+            <td><a id="form-cancel" href="/admin/category/" class="btn btn-danger">отмена</a></td>
         </tr>
         </tbody>
     </table>
-        {{ form.media }}
+    {{ form.media }}
 </form>

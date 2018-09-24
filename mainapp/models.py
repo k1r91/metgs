@@ -28,8 +28,7 @@ class Category(models.Model):
     name = models.CharField(max_length=128, unique=True, verbose_name="Наименование")
     desc = HTMLField(blank=True, null=True, verbose_name="Описание")
     image = models.ImageField(upload_to='category', blank=True, null=True, verbose_name="Изображение")
-    related = models.ForeignKey('self', blank=True, null=True, on_delete=models.PROTECT,
-                                verbose_name="Сопутствующие категории")
+    related = models.ManyToManyField('self', blank=True, null=True, verbose_name="Сопутствующие категории")
 
     def __str__(self):
         return self.name

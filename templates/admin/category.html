@@ -3,6 +3,16 @@
 {% block styles %}
     {{ block.super }}
 {% endblock %}
+{% block fly %}
+    <div id="category-delete-container" class="hidden">
+        <form id="category-delete-form" action="" method="post">
+            {% csrf_token %}
+            <div id="category-delete-form-inner">
+                {% include 'admin/inc_category_delete.html' %}
+            </div>
+        </form>
+    </div>
+{% endblock %}
 {% block content %}
     <div class="content">
         <div class="container-fluid">
@@ -29,7 +39,7 @@
                                         <tr>
                                             <td>{{ category.name | capfirst }}</td>
                                             <td id="category-desc{{ category.id }}">
-                                                <div id="short-{{ category.id }}">{{ category.short_desc | safe }}...</div>
+                                                <div id="short-{{ category.id }}">{{ category.short_desc | safe }}</div>
                                                 <div id="long-{{ category.id }}"
                                                      class="hidden">{{ category.desc | safe }}</div>
                                                 <button id="btn-show-{{ category.id }}" style="width:103px;"
@@ -50,11 +60,15 @@
                                                 Нет изображения
                                             {% endif %}
                                             </td>
-                                            <td>{{ category.related }}</td>
+                                            <td>{% for rel in category.related.all %}
+                                                <a href="/admin/category/edit/{{ rel.id }}">{{ rel | capfirst }}</a>
+                                                {% if forloop.counter != category.related.all.count %},&nbsp;{% endif %}
+                                            {% endfor %}</td>
                                             <td></td>
                                             <td><a href="/admin/category/edit/{{ category.id }}/"><span
                                                     class="glyphicon glyphicon-edit"></span></a>
-                                                <a href="/admin/category/delete/{{ category.id }}/"><span
+                                                <a id="{{ category.id }}" class="category-delete-link"
+                                                   href="/admin/category/delete/{{ category.id }}/"><span
                                                         class="glyphicon glyphicon-ban-circle"></span></a></td>
                                         </tr>
                                     {% endfor %}
@@ -96,7 +110,6 @@
                 </div>
             </div>
         </div>
-    </div>
     </div>
 {% endblock %}
 

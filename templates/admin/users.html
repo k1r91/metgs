@@ -4,6 +4,11 @@
     {{ block.super }}
     <link rel="stylesheet" href="{% static "css/login.css" %}"/>
 {% endblock %}
+{% block fly %}
+    <div id="user-delete" class="hidden">
+        {% include 'admin/inc_user_delete.html' %}
+    </div>
+{% endblock %}
 {% block content %}
     <div class="content">
         <div class="container-fluid">

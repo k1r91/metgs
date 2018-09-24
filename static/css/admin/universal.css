@@ -1,10 +1,8 @@
 #form-submit {
-    float: right;
     margin-right: 10px;
 }
 
 #form-cancel {
-    float: left;
     margin-left: 10px;
 }
 
@@ -18,3 +16,9 @@
 }
 
 .scrollable { border:2px solid #ccc; width:300px; height: 200px; overflow-y: scroll; }
+
+.field-label {
+    font-weight: bold;
+    text-align: right;
+    padding-right: 10px;
+}
