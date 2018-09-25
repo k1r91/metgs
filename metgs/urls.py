@@ -33,7 +33,7 @@ urlpatterns = [
     path('admin/get_user/<id>/', get_user),
     path('admin/delete_user/', delete_user),
     path('admin/category/', admin_category),
-    path('admin/category/delete/<id>/', delete_category),
+    path('admin/category/delete/<_id>/', delete_category),
     path('admin/category/add/', add_category),
     path('admin/category/edit/<_id>/', edit_category),
     path('tinymce/', include('tinymce.urls')),

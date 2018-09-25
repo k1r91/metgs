@@ -188,7 +188,7 @@ def delete_user(request):
     data = json.loads(request.body.decode())
     response = {}
     try:
-        user = User.objects.get(id=data['id'])
+        user = User.objects.get(pk=data['id'])
         response['errors'] = False
         user.delete()
     except User.DoesNotExist:
