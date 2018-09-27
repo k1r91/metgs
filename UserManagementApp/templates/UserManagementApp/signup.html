@@ -6,13 +6,13 @@
 {% endblock %}
 {% block scripts %}
     {{ block.super }}
-    <script src="{% static "js/signup.js" %}"></script>
+    <script src="{% static "UserManagementApp/js/signup.js" %}"></script>
 {% endblock %}
 {% block content %}
     <div class="login-page">
         <div class="form">
             {% block inner-form %}
-                <form class="login-form" method="post" action="/signup/">
+                <form class="login-form" method="post" action="/user/signup/">
                 {% csrf_token %}
                 {% for field in form %}
                     {{ field.label_tag }}<br/>

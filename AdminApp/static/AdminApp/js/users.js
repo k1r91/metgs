@@ -104,7 +104,7 @@ function flush_form() {
 
 function show_delete_dialog(id) {
     $.ajax({
-        url: 'get_user/' + id,
+        url: '/admin/get_user/' + id,
         type: 'GET',
         dataType: 'json',
         success: function (response, event) {

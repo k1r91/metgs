@@ -19,7 +19,7 @@ $(document).ready(function () {
         container.removeClass('hidden')
         container.css({'top': currentMousePos.y + 20, 'left': currentMousePos.x - 100})
         $.ajax({
-            url: '/get_category/' + id,
+            url: '/admin/get_category/' + id,
             method: 'get',
             dataType: 'json',
             success:

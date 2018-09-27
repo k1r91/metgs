@@ -31,7 +31,7 @@ def admin(request):
             form = UserEditFrom(request.POST or None, instance=user)
             if form.is_valid():
                 form.save()
-                return HttpResponseRedirect('/admin/')
+                return HttpResponseRedirect('AdminApp/')
     else:
         return render(request, 'AdminApp/users.html', context)
 
@@ -140,9 +140,8 @@ def add_category(request):
         form = CategoryForm(request.POST, request.FILES)
         if form.is_valid():
             form.save()
-            return admin_category(request, lpage=True)
+            return HttpResponseRedirect('/admin/category/?page=1000')
         else:
-            print("SYBHERE")
             return render(request, 'AdminApp/category_add.html', {'form': form})
 
 

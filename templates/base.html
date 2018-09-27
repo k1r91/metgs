@@ -72,7 +72,7 @@
                     </div>
                     <div class="item fourth" style="width: 264px">
                         {% if not user.is_authenticated %}
-                            <a href="/login/">
+                            <a href="/user/login/">
                                 <button type="button" id="login" class="btn btn-success btn-xs">
                                     Войти
                                 </button>
@@ -82,7 +82,7 @@
                                 <a href="/admin/"><span class="glyphicon glyphicon-text-background"></span></a>
                             {% endif %}
                             <span class="glyphicon glyphicon-user">{{ user.username }}</span>
-                            <a href="/logout/">
+                            <a href="/user/logout/">
                                 <button type="button" id="login" class="btn btn-success btn-xs">
                                     Выйти
                                 </button>
