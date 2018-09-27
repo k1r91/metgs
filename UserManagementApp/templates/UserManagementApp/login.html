@@ -1,0 +1,9 @@
+{% extends 'base.html' %}
+{% load staticfiles %}
+{% block styles %}
+    {{ block.super }}
+    <link rel="stylesheet" href="{% static "css/login.css" %}"/>
+{% endblock %}
+{% block content %}
+    {% include 'UserManagementApp/inc_login_form.html' %}
+{% endblock %}

@@ -1,0 +1,75 @@
+{% extends 'AdminApp/base.html' %}
+{% load staticfiles %}
+{% block styles %}
+    {{ block.super }}
+    <link rel="stylesheet" href="{% static "css/login.css" %}"/>
+{% endblock %}
+{% block fly %}
+    <div id="user-delete" class="hidden">
+        {% include 'AdminApp/inc_user_delete.html' %}
+    </div>
+{% endblock %}
+{% block content %}
+    <div class="content">
+        <div class="container-fluid">
+            <div class="row">
+                <div class="col-md-12">
+                    <div class="card">
+                        <div class="card-header card-header-primary">
+                            <h4 class="card-title ">Таблица пользователей</h4>
+                            <p class="card-category">Редактируйте пользователей</p>
+                        </div>
+                        <div class="card-body">
+                            <div class="table-responsive">
+                                <table class="table">
+                                    <thead class=" text-primary">
+                                    <th>
+                                        ID
+                                    </th>
+                                    <th>
+                                        Имя пользователся
+                                    </th>
+                                    <th>
+                                        Активен
+                                    </th>
+                                    <th>
+                                        Суперюзер
+                                    </th>
+                                    <th>
+                                        Сотрудник
+                                    </th>
+                                    <th>
+                                        Email
+                                    </th>
+                                    <th>
+                                        Последний логин
+                                    </th>
+                                    <th>
+                                        Дата присоединения
+                                    </th>
+                                    <th>
+                                        Действие
+                                    </th>
+                                    </thead>
+                                    <tbody id="users-list">
+                                    {% include 'AdminApp/inc_users_list.html' %}
+                                    </tbody>
+                                </table>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div id="edit-form">
+            {% include 'AdminApp/inc_user_edit_form.html' %}
+        </div>
+    </div>
+{% endblock %}
+{% block title_inside %}
+    Пользователи
+{% endblock %}
+{% block scripts %}
+    {{ block.super }}
+    <script src="{% static "AdminApp/js/users.js" %}"></script>
+{% endblock %}

@@ -1,0 +1,37 @@
+{% load staticfiles %}
+{% for error in field.errors %}
+    <p class="errors">{{ error }}</p>
+{% endfor %}
+<form action="" method="POST" enctype="multipart/form-data">
+    {% csrf_token %}
+    <table class="universal">
+        <tbody>
+        {% for field in form %}
+            <tr>
+                <td class="field-label">{{ field.label }}</td>
+                <td>
+                    {% if field.name == 'image' %}
+                        <label for="id_image" class="btn btn-primary">выберите файл</label>
+                        <div class="hidden">{{ field }}</div>
+                        {% if obj.image %}
+                            <img src="{{ obj.image.url }}" id="upload-img" alt="файл не выбран"/>
+                        {% endif %}
+                    {% elif field.name == 'related' %}
+                        <div class="scrollable">
+                            {{ field }}
+                        </div>
+                    {% else %}
+                        {{ field }}
+                    {% endif %}
+                </td>
+            </tr>
+            <tr style="height: 10px;"></tr>
+        {% endfor %}
+        <tr>
+            <td><input id="form-submit" class="btn btn-success" type="submit" value="ok"></td>
+            <td><a id="form-cancel" href="/admin/category/" class="btn btn-danger">отмена</a></td>
+        </tr>
+        </tbody>
+    </table>
+    {{ form.media }}
+</form>
