@@ -156,7 +156,7 @@ def edit_category(request, _id):
         form = CategoryForm(request.POST, request.FILES, instance=category)
         if form.is_valid():
             form.save()
-            return admin_category(request, lpage=True)
+            return HttpResponseRedirect('/admin/category/?page=1000')
         else:
             return render(request, 'AdminApp/category_edit.html', {'form': form, 'obj': category})
 
