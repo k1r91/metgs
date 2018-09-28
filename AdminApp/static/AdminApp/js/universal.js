@@ -14,4 +14,9 @@ $(document).ready(function () {
             reader.readAsDataURL(file);
         }
     })
+    $('#form-cancel').click(function(e){
+        e.stopPropagation()
+        e.preventDefault()
+        history.go(-1)
+    })
 })

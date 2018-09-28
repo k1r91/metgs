@@ -1,7 +1,7 @@
 from django import forms
 from django.contrib.auth.forms import UserCreationForm
 from django.contrib.auth.models import User
-from mainapp.models import Category, Good
+from mainapp.models import Category, Good, TopMenu
 
 class UserEditFrom(UserCreationForm):
     id = forms.IntegerField(label='', widget=forms.HiddenInput(attrs={'id': 'user_id'}), required=False)
@@ -34,4 +34,11 @@ class GoodForm(forms.ModelForm):
 
     class Meta:
         model = Good
+        fields = '__all__'
+
+
+class TopMenuForm(forms.ModelForm):
+
+    class Meta:
+        model = TopMenu
         fields = '__all__'

@@ -13,7 +13,12 @@ def fill_top_menu():
     TopMenu.objects.all().delete()
     data = db_data.top_menu()
     for item in data:
-        model = TopMenu(**item)
+        try:
+            image = ImageFile(open(item.pop('image'), 'rb'))
+            model = TopMenu(**item)
+            model.image = image
+        except KeyError:
+            model = TopMenu(**item)
         model.save()
     print('Top menu created.')
 
@@ -65,7 +70,8 @@ def fill_good():
 
 
 if __name__ == '__main__':
-    shutil.rmtree('media')
+    if os.path.exists('media'):
+        shutil.rmtree('media')
     fill_top_menu()
     fill_organization()
     fill_categories()

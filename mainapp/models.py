@@ -6,10 +6,12 @@ from tinymce.models import HTMLField
 
 
 class TopMenu(models.Model):
-    name = models.CharField(max_length=32)
-    slug = models.SlugField(unique=True)
-    visible = models.BooleanField(default=True)
-    content = models.TextField(blank=True, null=True)
+    name = models.CharField(max_length=32, verbose_name="Наименовение")
+    slug = models.SlugField(unique=True, verbose_name="Ссылка")
+    visible = models.BooleanField(default=True, verbose_name="Видимость")
+    desc = HTMLField(blank=True, null=True, verbose_name="Наполнение")
+    image = models.ImageField(blank=True, null=True, verbose_name="Изображение")
+    system = models.BooleanField(default=False, verbose_name="Системное")
 
 
 class Organization(models.Model):
@@ -38,7 +40,7 @@ class Category(models.Model):
 class Good(models.Model):
     name = models.CharField(max_length=128, unique=True, verbose_name="Наименование")
     price = models.IntegerField(blank=True, null=True, default=0, verbose_name="Цена")
-    image = models.ImageField(upload_to='good', verbose_name="Изображение")
+    image = models.ImageField(upload_to='good', blank=True, null=True, verbose_name="Изображение")
     desc = HTMLField(blank=True, null=True, verbose_name="Описание")
     category = models.ForeignKey(Category, on_delete=models.CASCADE, blank=True, null=True, verbose_name="Категория")
     related = models.ManyToManyField('self', blank=True, verbose_name="Сопутствующие товары")

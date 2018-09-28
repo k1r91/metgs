@@ -50,6 +50,12 @@
                         <p>Пользователи</p>
                     </a>
                 </li>
+                <li class="nav-item{% if page == 'menu' %} active{% endif %}">
+                    <a class="nav-link" href="/admin/menu/">
+                        <i class="material-icons">receipt</i>
+                        <p>Пункты меню</p>
+                    </a>
+                </li>
                 <li class="nav-item{% if page == 'category' %} active{% endif %}">
                     <a class="nav-link" href="/admin/category/">
                         <i class="material-icons">bubble_chart</i>
@@ -62,7 +68,42 @@
                         <p>Товары</p>
                     </a>
                 </li>
-
+                <li class="nav-item{% if page == 'price' %} active{% endif %}">
+                    <a class="nav-link" href="/admin/price/">
+                        <i class="material-icons">receipt</i>
+                        <p>Прайс-лист</p>
+                    </a>
+                </li>
+                <li class="nav-item{% if page == 'album' %} active{% endif %}">
+                    <a class="nav-link" href="/admin/album/">
+                        <i class="material-icons">photo_album</i>
+                        <p>Альбомы</p>
+                    </a>
+                </li>
+                <li class="nav-item{% if page == 'photo' %} active{% endif %}">
+                    <a class="nav-link" href="/admin/photo/">
+                        <i class="material-icons">photo_camera</i>
+                        <p>Фотографии</p>
+                    </a>
+                </li>
+                <li class="nav-item{% if page == 'news' %} active{% endif %}">
+                    <a class="nav-link" href="/admin/news/">
+                        <i class="material-icons">list_alt</i>
+                        <p>Новости</p>
+                    </a>
+                </li>
+                <li class="nav-item{% if page == 'news' %} active{% endif %}">
+                    <a class="nav-link" href="/admin/about/">
+                        <i class="material-icons">help</i>
+                        <p>О компании</p>
+                    </a>
+                </li>
+                <li class="nav-item{% if page == 'contact' %} active{% endif %}">
+                    <a class="nav-link" href="/admin/contact/">
+                        <i class="material-icons">contacts</i>
+                        <p>Контакты</p>
+                    </a>
+                </li>
                 {#                <li class="nav-item ">#}
                 {#                    <a class="nav-link" href="./user.html">#}
                 {#                        <i class="material-icons">dashboard</i>#}

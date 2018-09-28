@@ -26,9 +26,10 @@
             </tr>
             <tr style="height: 10px;"></tr>
         {% endfor %}
+        <input name="path" type="hidden" value={{ request.META.HTTP_REFERER }}>
         <tr>
             <td><input id="form-submit" class="btn btn-success" type="submit" value="ok"></td>
-            <td><a id="form-cancel" href="/admin/{{ page }}/" class="btn btn-danger">отмена</a></td>
+            <td><a id="form-cancel" href="#" class="btn btn-danger">отмена</a></td>
         </tr>
         </tbody>
     </table>

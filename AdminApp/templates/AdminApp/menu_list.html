@@ -8,7 +8,7 @@
         <form id="category-delete-form" action="" method="post">
             {% csrf_token %}
             <div id="category-delete-form-inner">
-                {% include 'AdminApp/inc_good_delete.html' %}
+                {% include 'AdminApp/inc_menu_delete.html' %}
             </div>
         </form>
     </div>
@@ -20,20 +20,19 @@
                 <div class="col-md-12">
                     <div class="card">
                         <div class="card-header card-header-primary">
-                            <h4 class="card-title ">Таблица товаров</h4>
-                            <p class="card-category">Редактируйте товары</p>
+                            <h4 class="card-title ">Таблица пунктов меню</h4>
+                            <p class="card-category">Редактируйте пункты меню</p>
                         </div>
                         <div class="card-body">
                             <div class="table-responsive">
                                 <table class="table">
                                     <thead class=" text-primary">
                                     <th>Наименование</th>
-                                    <th>Категория</th>
+                                    <th>Ссылка</th>
                                     <th style="min-width: 500px;">Описание</th>
                                     <th>Изображение</th>
-                                    <th>Сопутствующие товары</th>
-                                    <th>Цена</th>
-                                    <th>Активно</th>
+                                    <th>Видимость</th>
+                                    <th>Системное</th>
                                     <th>Действие</th>
                                     </thead>
                                     <tbody id="users-list">
@@ -41,9 +40,7 @@
                                         <tr>
                                             <td>{{ obj.name | capfirst }}</td>
                                             <td>
-                                                {% if obj.category %}
-                                                    <a href="/admin/category/edit/{{ obj.category.id }}">{{ obj.category }}</a>
-                                                {% endif %}
+                                                {{ obj.slug }}
                                             </td>
                                             <td id="obj-desc-{{ obj.id }}">
                                                 <div id="short-{{ obj.id }}">{{ obj.short_desc | safe }}</div>
@@ -67,16 +64,12 @@
                                                 Нет изображения
                                             {% endif %}
                                             </td>
-                                            <td>{% for rel in obj.related.all %}
-                                                <a href="/admin/good/edit/{{ rel.id }}">{{ rel | capfirst }}</a>
-                                                {% if forloop.counter != obj.related.all.count %},&nbsp;{% endif %}
-                                            {% endfor %}</td>
-                                            <td>{{ obj.price }}</td>
-                                            <td>{% if obj.is_active %}Да{% else %}Нет{% endif %}</td>
-                                            <td><a href="/admin/good/edit/{{ obj.id }}/"><span
+                                            <td>{% if obj.visible %}Да{% else %}Нет{% endif %}</td>
+                                            <td>{% if obj.system %}Да{% else %}Нет{% endif %}</td>
+                                            <td><a href="/admin/menu/edit/{{ obj.id }}/"><span
                                                     class="glyphicon glyphicon-edit"></span></a>
                                                 <a id="{{ obj.id }}" class="obj-delete-link"
-                                                   href="/admin/good/delete/{{ obj.id }}/"><span
+                                                   href="/admin/menu/delete/{{ obj.id }}/"><span
                                                         class="glyphicon glyphicon-ban-circle"></span></a></td>
                                         </tr>
                                     {% endfor %}
@@ -108,7 +101,7 @@
                                             <button class="btn btn-primary btn-md">вперёд</button>
                                         </a>
                                     </div>
-                                    <a href="/admin/good/add/">
+                                    <a href="/admin/menu/add/">
                                         <button class="btn btn-success">добавить</button>
                                     </a>
                                 </div>
@@ -126,5 +119,5 @@
 {% endblock %}
 {% block scripts %}
     {{ block.super }}
-    <script type="text/javascript" src="{% static "AdminApp/js/good.js" %}"></script>
+    <script type="text/javascript" src="{% static "AdminApp/js/menu.js" %}"></script>
 {% endblock %}
