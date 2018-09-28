@@ -32,6 +32,7 @@
                                     <th>Изображение</th>
                                     <th>Сопутствующие категории</th>
                                     <th>Количество товаров</th>
+                                    <th>Активно</th>
                                     <th>Действие</th>
                                     </thead>
                                     <tbody id="users-list">
@@ -65,6 +66,7 @@
                                                 {% if forloop.counter != category.related.all.count %},&nbsp;{% endif %}
                                             {% endfor %}</td>
                                             <td></td>
+                                            <td>{% if category.is_active %}Да{% else %}Нет{% endif %}</td>
                                             <td><a href="/admin/category/edit/{{ category.id }}/"><span
                                                     class="glyphicon glyphicon-edit"></span></a>
                                                 <a id="{{ category.id }}" class="category-delete-link"

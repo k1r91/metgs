@@ -29,6 +29,7 @@ class Category(models.Model):
     desc = HTMLField(blank=True, null=True, verbose_name="Описание")
     image = models.ImageField(upload_to='category', blank=True, null=True, verbose_name="Изображение")
     related = models.ManyToManyField('self', blank=True, null=True, verbose_name="Сопутствующие категории")
+    is_active = models.BooleanField(blank=True, default=True, verbose_name='Активна')
 
     def __str__(self):
         return self.name
@@ -42,3 +43,4 @@ class Good(models.Model):
     desc = HTMLField(blank=True, null=True)
     sub_desc = models.TextField(blank=True, null=True)
     related = models.ForeignKey('self', blank=True, null=True, on_delete=models.PROTECT)
+    is_active = models.BooleanField(blank=True, default=True, verbose_name='Активен')

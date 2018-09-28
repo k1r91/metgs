@@ -22,7 +22,7 @@ def admin(request):
     if request.method == 'GET':
         edit_form = UserEditFrom()
         context['edit_form'] = edit_form
-        return render(request, 'AdminApp/users.html', context)
+        return render(request, 'AdminApp/users_list.html', context)
     elif request.method == 'POST':
         id = request.POST.get('id')
         print(id)
@@ -33,7 +33,7 @@ def admin(request):
                 form.save()
                 return HttpResponseRedirect('AdminApp/')
     else:
-        return render(request, 'AdminApp/users.html', context)
+        return render(request, 'AdminApp/users_list.html', context)
 
 
 def get_user_form(request, id):
@@ -113,7 +113,7 @@ def admin_category(request, lpage=False):
     if not request.user.is_staff:
         raise Http404
     categories = Category.objects.all()
-    paginator = Paginator(categories, 5)
+    paginator = Paginator(categories, 25)
     page = request.GET.get('page')
     try:
         categories = paginator.page(page)
@@ -127,7 +127,7 @@ def admin_category(request, lpage=False):
         desc = cat.desc.split(' ')
         cat.short_desc = ' '.join(desc[:15])
         cat.related_cats = cat.related.all()
-    return render(request, 'AdminApp/category.html', {'categories': categories})
+    return render(request, 'AdminApp/category_list.html', {'categories': categories})
 
 
 def add_category(request):
