@@ -1,7 +1,7 @@
 from django import forms
 from django.contrib.auth.forms import UserCreationForm
 from django.contrib.auth.models import User
-from mainapp.models import Category
+from mainapp.models import Category, Good
 
 class UserEditFrom(UserCreationForm):
     id = forms.IntegerField(label='', widget=forms.HiddenInput(attrs={'id': 'user_id'}), required=False)
@@ -22,4 +22,16 @@ class CategoryForm(forms.ModelForm):
 
     class Meta:
         model = Category
+        fields = '__all__'
+
+
+class GoodForm(forms.ModelForm):
+    related = forms.ModelMultipleChoiceField(
+        required=False,
+        label="Сопутствующие товары",
+        queryset=Good.objects.all(),
+        widget=forms.CheckboxSelectMultiple)
+
+    class Meta:
+        model = Good
         fields = '__all__'

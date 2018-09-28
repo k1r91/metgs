@@ -28,7 +28,7 @@ class Category(models.Model):
     name = models.CharField(max_length=128, unique=True, verbose_name="Наименование")
     desc = HTMLField(blank=True, null=True, verbose_name="Описание")
     image = models.ImageField(upload_to='category', blank=True, null=True, verbose_name="Изображение")
-    related = models.ManyToManyField('self', blank=True, null=True, verbose_name="Сопутствующие категории")
+    related = models.ManyToManyField('self', blank=True, verbose_name="Сопутствующие категории")
     is_active = models.BooleanField(blank=True, default=True, verbose_name='Активна')
 
     def __str__(self):
@@ -36,11 +36,14 @@ class Category(models.Model):
 
 
 class Good(models.Model):
-    category = models.ForeignKey(Category, on_delete=models.CASCADE, blank=True, null=True)
-    image = models.ImageField(upload_to='good')
-    name = models.CharField(max_length=128, unique=True)
-    price = models.IntegerField(blank=True, null=True)
-    desc = HTMLField(blank=True, null=True)
-    sub_desc = models.TextField(blank=True, null=True)
-    related = models.ForeignKey('self', blank=True, null=True, on_delete=models.PROTECT)
-    is_active = models.BooleanField(blank=True, default=True, verbose_name='Активен')
+    name = models.CharField(max_length=128, unique=True, verbose_name="Наименование")
+    price = models.IntegerField(blank=True, null=True, default=0, verbose_name="Цена")
+    image = models.ImageField(upload_to='good', verbose_name="Изображение")
+    desc = HTMLField(blank=True, null=True, verbose_name="Описание")
+    category = models.ForeignKey(Category, on_delete=models.CASCADE, blank=True, null=True, verbose_name="Категория")
+    related = models.ManyToManyField('self', blank=True, verbose_name="Сопутствующие товары")
+    is_active = models.BooleanField(blank=True, default=True, verbose_name="Активен")
+    rating = models.IntegerField(blank=True, default=0, null=True, verbose_name="Рейтинг")
+
+    def __str__(self):
+        return self.name

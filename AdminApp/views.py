@@ -8,8 +8,8 @@ from django.template import loader
 from django.core.paginator import Paginator, EmptyPage, PageNotAnInteger
 from django.template.context_processors import csrf
 
-from AdminApp.forms import UserEditFrom, CategoryForm
-from mainapp.models import Category
+from AdminApp.forms import UserEditFrom, CategoryForm, GoodForm
+from mainapp.models import Category, Good
 
 
 def admin(request):
@@ -19,6 +19,7 @@ def admin(request):
     users = User.objects.all()
     context = dict()
     context['users'] = users
+    context['page'] = 'user'
     if request.method == 'GET':
         edit_form = UserEditFrom()
         context['edit_form'] = edit_form
@@ -109,7 +110,7 @@ def delete_user(request):
     return JsonResponse(response)
 
 
-def admin_category(request, lpage=False):
+def list_category(request):
     if not request.user.is_staff:
         raise Http404
     categories = Category.objects.all()
@@ -121,13 +122,14 @@ def admin_category(request, lpage=False):
         categories = paginator.page(1)
     except EmptyPage:
         categories = paginator.page(paginator.num_pages)
-    if lpage:
-        categories = paginator.page(paginator.num_pages)
     for cat in categories:
-        desc = cat.desc.split(' ')
-        cat.short_desc = ' '.join(desc[:15])
+        if cat.desc:
+            desc = cat.desc.split(' ')
+            cat.short_desc = ' '.join(desc[:15])
+        else:
+            cat.short_desc = ""
         cat.related_cats = cat.related.all()
-    return render(request, 'AdminApp/category_list.html', {'categories': categories})
+    return render(request, 'AdminApp/category_list.html', {'categories': categories, 'page': 'category'})
 
 
 def add_category(request):
@@ -135,14 +137,14 @@ def add_category(request):
         raise Http404
     if request.method == 'GET':
         form = CategoryForm()
-        return render(request, 'AdminApp/category_add.html', {'form': form})
+        return render(request, 'AdminApp/category_add.html', {'form': form, 'page': 'category'})
     elif request.method == 'POST':
         form = CategoryForm(request.POST, request.FILES)
         if form.is_valid():
             form.save()
             return HttpResponseRedirect('/admin/category/?page=1000')
         else:
-            return render(request, 'AdminApp/category_add.html', {'form': form})
+            return render(request, 'AdminApp/category_add.html', {'form': form, 'page': 'category'})
 
 
 def edit_category(request, _id):
@@ -151,7 +153,7 @@ def edit_category(request, _id):
     category = get_object_or_404(Category, id=_id)
     if request.method == 'GET':
         form = CategoryForm(instance=category)
-        return render(request, 'AdminApp/category_edit.html', {'form': form, 'obj': category})
+        return render(request, 'AdminApp/category_edit.html', {'form': form, 'obj': category, 'page': 'category'})
     elif request.method == 'POST':
         form = CategoryForm(request.POST, request.FILES, instance=category)
         if form.is_valid():
@@ -180,5 +182,83 @@ def delete_category(request, _id):
         if request.user.is_superuser:
             category = get_object_or_404(Category, id=_id)
             category.delete()
+            return HttpResponseRedirect(request.META.get('HTTP_REFERER'))
+    raise Http404
+
+
+# CRUD for goods
+
+
+def list_good(request):
+    if not request.user.is_staff:
+        raise Http404
+    objects = Good.objects.all()
+    paginator = Paginator(objects, 25)
+    page = request.GET.get('page')
+    try:
+        objects = paginator.page(page)
+    except PageNotAnInteger:
+        objects = paginator.page(1)
+    except EmptyPage:
+        objects = paginator.page(paginator.num_pages)
+    for obj in objects:
+        if obj.desc:
+            desc = obj.desc.split(' ')
+            obj.short_desc = ' '.join(desc[:15])
+        else:
+            obj.short_desc = ""
+    return render(request, 'AdminApp/good_list.html', {'objects': objects, 'page': 'good'})
+
+
+def add_good(request):
+    if not request.user.is_staff:
+        raise Http404
+    if request.method == 'GET':
+        form = GoodForm()
+        return render(request, 'AdminApp/good_add.html', {'form': form, 'page': 'good'})
+    elif request.method == 'POST':
+        form = GoodForm(request.POST, request.FILES)
+        if form.is_valid():
+            form.save()
+            return HttpResponseRedirect('/admin/good/?page=1000')
+        else:
+            return render(request, 'AdminApp/good_add.html', {'form': form, 'page': 'good'})
+
+
+def edit_good(request, _id):
+    if not request.user.is_staff:
+        raise Http404
+    good = get_object_or_404(Good, id=_id)
+    if request.method == 'GET':
+        form = GoodForm(instance=good)
+        return render(request, 'AdminApp/good_edit.html', {'form': form, 'obj': good, 'page': 'good'})
+    elif request.method == 'POST':
+        form = GoodForm(request.POST, request.FILES, instance=good)
+        if form.is_valid():
+            form.save()
+            return HttpResponseRedirect('/admin/good/?page=1000')
+        else:
+            return render(request, 'AdminApp/good_edit.html', {'form': form, 'obj': good, 'page': 'good'})
+
+
+def get_good(request, id):
+    obj = get_object_or_404(Good, id=id)
+    context = {'obj': obj}
+    html = loader.render_to_string('AdminApp/inc_good_delete.html', context)
+    response = {'html': html, 'id': id}
+    return JsonResponse(response)
+
+
+def delete_good(request, _id):
+    """
+    delete category object and redirect to previous pagination view, to certain page
+    :param request:
+    :param _id:
+    :return:
+    """
+    if request.method == 'POST':
+        if request.user.is_superuser:
+            obj = get_object_or_404(Good, id=_id)
+            obj.delete()
             return HttpResponseRedirect(request.META.get('HTTP_REFERER'))
     raise Http404

@@ -1,6 +1,8 @@
 import os
+import shutil
 import django
 from django.core.files.images import ImageFile
+from django.core.exceptions import ObjectDoesNotExist
 os.environ.setdefault("DJANGO_SETTINGS_MODULE", "metgs.settings")
 django.setup()
 import db_data
@@ -42,8 +44,30 @@ def fill_categories():
     print('Categories created.')
 
 
+def fill_good():
+    Good.objects.all().delete()
+    data = db_data.good()
+    for item in data:
+        try:
+            category = Category.objects.get(name=item.pop('category_name'))
+        except (ObjectDoesNotExist, KeyError):
+            category = None
+        try:
+            image = ImageFile(open(item.pop('image'), 'rb'))
+            good = Good(**item)
+            good.category = category
+            good.image = image
+        except KeyError:
+            good = Good(**item)
+        finally:
+            good.save()
+    print('Goods created.')
+
+
 if __name__ == '__main__':
+    shutil.rmtree('media')
     fill_top_menu()
     fill_organization()
     fill_categories()
+    fill_good()
     pass

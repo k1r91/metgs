@@ -13,9 +13,8 @@
                     {% if field.name == 'image' %}
                         <label for="id_image" class="btn btn-primary">выберите файл</label>
                         <div class="hidden">{{ field }}</div>
-                        {% if obj.image %}
-                            <img src="{{ obj.image.url }}" id="upload-img" alt="файл не выбран"/>
-                        {% endif %}
+                        <img src="{% if obj.image %}{{ obj.image.url }}{% endif %}" id="upload-img"
+                             alt="файл не выбран"/>
                     {% elif field.name == 'related' %}
                         <div class="scrollable">
                             {{ field }}
@@ -29,7 +28,7 @@
         {% endfor %}
         <tr>
             <td><input id="form-submit" class="btn btn-success" type="submit" value="ok"></td>
-            <td><a id="form-cancel" href="/admin/category/" class="btn btn-danger">отмена</a></td>
+            <td><a id="form-cancel" href="/admin/{{ page }}/" class="btn btn-danger">отмена</a></td>
         </tr>
         </tbody>
     </table>
