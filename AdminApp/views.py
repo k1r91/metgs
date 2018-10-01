@@ -7,6 +7,8 @@ from django.http import JsonResponse
 from django.template import loader
 from django.core.paginator import Paginator, EmptyPage, PageNotAnInteger
 from django.template.context_processors import csrf
+from django.core.exceptions import ObjectDoesNotExist
+from django.core.files.images import ImageFile
 
 from AdminApp.forms import UserEditFrom, CategoryForm, GoodForm, TopMenuForm, PhotoAlbumForm, ImageFieldForm
 from mainapp.models import Category, Good, TopMenu, PhotoAlbum, PhotoImage
@@ -427,10 +429,12 @@ def edit_album(request, _id):
                       {'form': form, 'obj': obj, 'page': 'album', 'images': images})
     elif request.method == 'POST':
         form = PhotoAlbumForm(request.POST, request.FILES, instance=obj)
-        # get images id after user edit photos
-        images_id = request.POST.get('images').split()
-        for img_id in images_id:
-            print('IMAGE ID: ', img_id)
+        images = request.FILES.getlist('file_field')
+        for img in images:
+            image = PhotoImage()
+            image.album = obj
+            image.image = img
+            image.save()
         if form.is_valid():
             form.save()
             return HttpResponseRedirect(request.POST.get('path'))
@@ -465,8 +469,14 @@ def delete_image(request):
     if not request.user.is_staff:
         raise Http404
     data = json.loads(request.body.decode())
+    response = {}
     for item in data:
         if item['name'] == 'photo_id':
             _id = item['value']
-    print(_id)
-    return JsonResponse({'status': 'OK'})
+    try:
+        obj = PhotoImage.objects.get(pk=_id)
+        obj.delete()
+        response['status'] = 'OK'
+    except ObjectDoesNotExist:
+        response['errors'] = True
+    return JsonResponse(response)

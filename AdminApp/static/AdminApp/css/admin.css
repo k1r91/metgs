@@ -116,3 +116,6 @@ div.form {
 .remove-image button, .remove-image input {
     min-width: 40%;
 }
+#span-plus {
+    margin-right: 0px;
+}

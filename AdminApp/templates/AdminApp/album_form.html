@@ -1,12 +1,12 @@
 {% load staticfiles %}
-{% for error in field.errors %}
-    <p class="errors">{{ error }}</p>
-{% endfor %}
 <form action="" method="POST" enctype="multipart/form-data">
     {% csrf_token %}
     <table class="universal">
         <tbody>
         {% for field in form %}
+            {% for error in field.errors %}
+                <p class="errors">{{ error }}</p>
+            {% endfor %}
             <tr>
                 <td class="field-label">{{ field.label }}</td>
                 <td>{{ field }}</td>
@@ -14,16 +14,19 @@
             <tr style="height: 10px;"></tr>
         {% endfor %}
         <tr>
-            <td><input name="images" type="text" value="{% for img in images %}{{ img.id }} {% endfor %}"/></td>
-        </tr>
-        <tr>
             <td colspan="2">
-                {% for img in images %}
-                    <a id="image{{ img.id }}" href="{{ img.image.url }}"><img style="width: 200px; margin-bottom: 5px;"
-                                                                              src="{{ img.image.url }}"/></a>
-                    <a href="" class="remove-image-link" id="{{ img.id }}">
-                        <span class="glyphicon glyphicon-ban-circle"></span></a>
-                {% endfor %}
+                <div id="images">
+                    {% for img in images %}
+                        <a id="image{{ img.id }}" href="{{ img.image.url }}"><img
+                                style="height:150px; width: 200px; margin-bottom: 5px;"
+                                src="{{ img.image.url }}"/></a>
+                        <a href="" class="remove-image-link" id="{{ img.id }}">
+                            <span class="glyphicon glyphicon-ban-circle"></span></a>
+                    {% endfor %}
+                </div>
+                <label class="btn btn-primary" for="upload-file"><span id="span-plus"
+                                                                       class="glyphicon glyphicon-plus"></span></label>
+                <input id="upload-file" class="hidden" type="file" name="file_field" multiple/>
             </td>
         </tr>
         <input name="path" type="hidden" value={{ request.META.HTTP_REFERER }}>
