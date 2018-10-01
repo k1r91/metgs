@@ -1,7 +1,7 @@
 from django import forms
 from django.contrib.auth.forms import UserCreationForm
 from django.contrib.auth.models import User
-from mainapp.models import Category, Good, TopMenu
+from mainapp.models import Category, Good, TopMenu, PhotoAlbum
 
 class UserEditFrom(UserCreationForm):
     id = forms.IntegerField(label='', widget=forms.HiddenInput(attrs={'id': 'user_id'}), required=False)
@@ -42,3 +42,14 @@ class TopMenuForm(forms.ModelForm):
     class Meta:
         model = TopMenu
         fields = '__all__'
+
+
+class PhotoAlbumForm(forms.ModelForm):
+
+    class Meta:
+        model = PhotoAlbum
+        fields = '__all__'
+
+
+class ImageFieldForm(forms.Form):
+    file_field = forms.FileField(widget=forms.ClearableFileInput(attrs={'multiple': True}))

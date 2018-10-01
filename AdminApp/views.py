@@ -8,8 +8,8 @@ from django.template import loader
 from django.core.paginator import Paginator, EmptyPage, PageNotAnInteger
 from django.template.context_processors import csrf
 
-from AdminApp.forms import UserEditFrom, CategoryForm, GoodForm, TopMenuForm
-from mainapp.models import Category, Good, TopMenu
+from AdminApp.forms import UserEditFrom, CategoryForm, GoodForm, TopMenuForm, PhotoAlbumForm, ImageFieldForm
+from mainapp.models import Category, Good, TopMenu, PhotoAlbum, PhotoImage
 
 
 def create_context(page=None, objects=None, form=None, obj=None):
@@ -23,6 +23,7 @@ def create_context(page=None, objects=None, form=None, obj=None):
     if obj:
         context['obj'] = obj
     return context
+
 
 # CRUD for users using ajax ###########################################################################################
 
@@ -373,3 +374,99 @@ def delete_menu(request, _id):
             obj.delete()
             return HttpResponseRedirect(request.META.get('HTTP_REFERER'))
     raise Http404
+
+
+# CRUD for albums
+
+
+def list_album(request):
+    if not request.user.is_staff:
+        raise Http404
+    objects = PhotoAlbum.objects.all()
+    paginator = Paginator(objects, 10)
+    page = request.GET.get('page')
+    try:
+        objects = paginator.page(page)
+    except PageNotAnInteger:
+        objects = paginator.page(1)
+    except EmptyPage:
+        objects = paginator.page(paginator.num_pages)
+    for obj in objects:
+        if obj.desc:
+            desc = obj.desc.split(' ')
+            obj.short_desc = ' '.join(desc[:15])
+        else:
+            obj.short_desc = ""
+    context = create_context(page='album', objects=objects)
+    return render(request, 'AdminApp/album_list.html', context)
+
+
+def add_album(request):
+    if not request.user.is_staff:
+        raise Http404
+    if request.method == 'GET':
+        form = PhotoAlbumForm()
+        return render(request, 'AdminApp/album_add.html', {'form': form, 'page': 'album'})
+    elif request.method == 'POST':
+        form = PhotoAlbumForm(request.POST, request.FILES)
+        if form.is_valid():
+            form.save()
+            return HttpResponseRedirect(request.POST.get('path'))
+        else:
+            return render(request, 'AdminApp/album_add.html', {'form': form, 'page': 'album'})
+
+
+def edit_album(request, _id):
+    if not request.user.is_staff:
+        raise Http404
+    obj = get_object_or_404(PhotoAlbum, id=_id)
+    if request.method == 'GET':
+        form = PhotoAlbumForm(instance=obj)
+        images = PhotoImage.objects.filter(album_id=obj.id)
+        return render(request, 'AdminApp/album_edit.html',
+                      {'form': form, 'obj': obj, 'page': 'album', 'images': images})
+    elif request.method == 'POST':
+        form = PhotoAlbumForm(request.POST, request.FILES, instance=obj)
+        # get images id after user edit photos
+        images_id = request.POST.get('images').split()
+        for img_id in images_id:
+            print('IMAGE ID: ', img_id)
+        if form.is_valid():
+            form.save()
+            return HttpResponseRedirect(request.POST.get('path'))
+        else:
+            return render(request, 'AdminApp/album_edit.html', {'form': form, 'obj': obj, 'page': 'album'})
+
+
+def get_album(request, _id):
+    obj = get_object_or_404(PhotoAlbum, id=_id)
+    context = {'obj': obj}
+    html = loader.render_to_string('AdminApp/inc_album_delete.html', context)
+    response = {'html': html, 'id': _id}
+    return JsonResponse(response)
+
+
+def delete_album(request, _id):
+    """
+    delete category object and redirect to previous pagination view, to certain page
+    :param request:
+    :param _id:
+    :return:
+    """
+    if request.method == 'POST':
+        if request.user.is_superuser:
+            obj = get_object_or_404(PhotoAlbum, id=_id)
+            obj.delete()
+            return HttpResponseRedirect(request.META.get('HTTP_REFERER'))
+    raise Http404
+
+
+def delete_image(request):
+    if not request.user.is_staff:
+        raise Http404
+    data = json.loads(request.body.decode())
+    for item in data:
+        if item['name'] == 'photo_id':
+            _id = item['value']
+    print(_id)
+    return JsonResponse({'status': 'OK'})

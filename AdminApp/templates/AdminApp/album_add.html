@@ -1,0 +1,19 @@
+{% extends 'AdminApp/base.html' %}
+{% load staticfiles %}
+{% block title_inside %} Форма для добавления альбома {% endblock %}
+{% block content %}
+    <div class="content">
+        <div class="container-fluid">
+            <div class="container-fluid">
+                <div class="card card-plain">
+                    <div class="card-header card-header-primary">
+                        <h4 class="card-title">Добавить альбом</h4>
+                    </div>
+                    <div class="form">
+                        {% include 'AdminApp/universal_form.html' %}
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+{% endblock %}

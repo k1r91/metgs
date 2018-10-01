@@ -24,4 +24,10 @@ urlpatterns = [
     path('menu/add/', add_menu),
     path('menu/edit/<_id>/', edit_menu),
     path('get_menu/<_id>/', get_menu),
+    path('album/', list_album),
+    path('album/delete/<_id>/', delete_album),
+    path('album/add/', add_album),
+    path('album/edit/<_id>/', edit_album),
+    path('get_album/<_id>/', get_album),
+    path('image/delete/', delete_image)
 ]

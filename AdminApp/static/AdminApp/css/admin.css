@@ -103,3 +103,16 @@ div.form {
     margin: 0 auto;
     width: 47%;
 }
+
+.remove-image {
+    position: absolute;
+    top: 0px;
+    left: 0px;
+    border: 1px solid lightgray;
+    background-color: #fff;
+    padding: 10px;
+    text-align: center;
+}
+.remove-image button, .remove-image input {
+    min-width: 40%;
+}

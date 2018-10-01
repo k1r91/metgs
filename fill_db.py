@@ -69,6 +69,26 @@ def fill_good():
     print('Goods created.')
 
 
+def fill_album():
+    PhotoAlbum.objects.all().delete()
+    data = db_data.album()
+    for item in data:
+        album = PhotoAlbum(**item)
+        album.save()
+    print('Albums created')
+
+
+def fill_photo():
+    PhotoImage.objects.all().delete()
+    data = db_data.photo()
+    for item in data:
+        album = PhotoAlbum.objects.get(name=item["album"])
+        image = ImageFile(open(item["image"], 'rb'))
+        obj = PhotoImage(album=album, image=image)
+        obj.save()
+    print('Photos created.')
+
+
 if __name__ == '__main__':
     if os.path.exists('media'):
         shutil.rmtree('media')
@@ -76,4 +96,6 @@ if __name__ == '__main__':
     fill_organization()
     fill_categories()
     fill_good()
+    fill_album()
+    fill_photo()
     pass

@@ -49,3 +49,17 @@ class Good(models.Model):
 
     def __str__(self):
         return self.name
+
+
+class PhotoAlbum(models.Model):
+    name = models.CharField(max_length=128, verbose_name="Наименовение", unique=True)
+    desc = HTMLField(blank=True, null=True, verbose_name="Описание")
+    visible = models.BooleanField(default=True, verbose_name="Видимость")
+
+
+class PhotoImage(models.Model):
+    album = models.ForeignKey(PhotoAlbum, verbose_name="Альбом", on_delete=models.CASCADE)
+    image = models.ImageField(verbose_name="Изображение", upload_to='album')
+    desc = HTMLField(blank=True, null=True, verbose_name="Описание")
+    name = models.CharField(max_length=128, verbose_name="Наименовение", blank=True, null=True)
+    visible = models.BooleanField(default=True, verbose_name="Видимость")

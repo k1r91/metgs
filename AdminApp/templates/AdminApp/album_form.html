@@ -1,0 +1,47 @@
+{% load staticfiles %}
+{% for error in field.errors %}
+    <p class="errors">{{ error }}</p>
+{% endfor %}
+<form action="" method="POST" enctype="multipart/form-data">
+    {% csrf_token %}
+    <table class="universal">
+        <tbody>
+        {% for field in form %}
+            <tr>
+                <td class="field-label">{{ field.label }}</td>
+                <td>{{ field }}</td>
+            </tr>
+            <tr style="height: 10px;"></tr>
+        {% endfor %}
+        <tr>
+            <td><input name="images" type="text" value="{% for img in images %}{{ img.id }} {% endfor %}"/></td>
+        </tr>
+        <tr>
+            <td colspan="2">
+                {% for img in images %}
+                    <a id="image{{ img.id }}" href="{{ img.image.url }}"><img style="width: 200px; margin-bottom: 5px;"
+                                                                              src="{{ img.image.url }}"/></a>
+                    <a href="" class="remove-image-link" id="{{ img.id }}">
+                        <span class="glyphicon glyphicon-ban-circle"></span></a>
+                {% endfor %}
+            </td>
+        </tr>
+        <input name="path" type="hidden" value={{ request.META.HTTP_REFERER }}>
+        <tr>
+            <td><input style="float: right;" id="form-submit" class="btn btn-success" type="submit" value="ok"></td>
+            <td><a id="form-cancel" href="#" class="btn btn-danger">отмена</a></td>
+        </tr>
+        </tbody>
+    </table>
+    {{ form.media }}
+</form>
+<div class="remove-image hidden">
+    <p>Удалить фотографию безвозвратно?</p>
+    <form id="delete-image" action="" method="post">
+        {% csrf_token %}
+        <input name="obj_id" type="hidden" value="{{ obj.id }}"/>
+        <input id="photo_id" name="photo_id" type="hidden"/>
+        <input class="btn btn-danger" type="submit" value="удалить"/>
+        <button id="remove-cancel" class="btn btn-primary">Отмена</button>
+    </form>
+</div>

@@ -24,9 +24,11 @@
                 <div class="aligner">
                     <ul>
                         {% for menu in menu_list %}
-                            <li>
-                                <a href="/{{ menu.slug }}/">{{ menu.name|upper }}</a>
-                            </li>
+                            {% if menu.visible %}
+                                <li>
+                                    <a href="/{{ menu.slug }}/">{{ menu.name|upper }}</a>
+                                </li>
+                            {% endif %}
                         {% endfor %}
                     </ul>
                 </div>

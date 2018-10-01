@@ -440,3 +440,69 @@ def good():
          },
     ]
     return data
+
+
+def album():
+    data = [
+        {"name": "Главная страница",
+         },
+        {"name": "Фотогалерея базы",
+         "desc": "Фотогалерея базы по адресу г. Екатеринбург, ул. Монтажников, 32а"},
+    ]
+    return data
+
+
+def photo():
+    data = [
+        {"album": "Главная страница",
+         "image": os.path.join("images", "photo", "1.jpg")},
+        {"album": "Главная страница",
+         "image": os.path.join("images", "photo", "2.JPG")},
+        {"album": "Главная страница",
+         "image": os.path.join("images", "photo", "3.png")},
+        {"album": "Главная страница",
+         "image": os.path.join("images", "photo", "4.jpeg")},
+        {"album": "Главная страница",
+         "image": os.path.join("images", "photo", "5.jpg")},
+        {"album": "Главная страница",
+         "image": os.path.join("images", "photo", "6.jpg")},
+        {"album": "Главная страница",
+         "image": os.path.join("images", "photo", "7.jpg")},
+        {"album": "Главная страница",
+         "image": os.path.join("images", "photo", "8.jpg")},
+        {"album": "Главная страница",
+         "image": os.path.join("images", "photo", "9.jpeg")},
+        {"album": "Главная страница",
+         "image": os.path.join("images", "photo", "10.jpg")},
+        {"album": "Главная страница",
+         "image": os.path.join("images", "photo", "11.jpg")},
+        {"album": "Главная страница",
+         "image": os.path.join("images", "photo", "12.jpg")},
+        {"album": "Главная страница",
+         "image": os.path.join("images", "photo", "13.jpg")},
+        {"album": "Главная страница",
+         "image": os.path.join("images", "photo", "14.jpg")},
+        {"album": "Фотогалерея базы",
+         "image": os.path.join("images", "photo", "baza1.jpg")},
+        {"album": "Фотогалерея базы",
+         "image": os.path.join("images", "photo", "baza2.jpg")},
+        {"album": "Фотогалерея базы",
+         "image": os.path.join("images", "photo", "baza3.jpg")},
+        {"album": "Фотогалерея базы",
+         "image": os.path.join("images", "photo", "baza4.jpg")},
+        {"album": "Фотогалерея базы",
+         "image": os.path.join("images", "photo", "baza5.jpg")},
+        {"album": "Фотогалерея базы",
+         "image": os.path.join("images", "photo", "baza6.jpg")},
+        {"album": "Фотогалерея базы",
+         "image": os.path.join("images", "photo", "baza7.jpg")},
+        {"album": "Фотогалерея базы",
+         "image": os.path.join("images", "photo", "baza8.jpg")},
+        {"album": "Фотогалерея базы",
+         "image": os.path.join("images", "photo", "baza9.jpg")},
+        {"album": "Фотогалерея базы",
+         "image": os.path.join("images", "photo", "baza10.jpg")},
+        {"album": "Фотогалерея базы",
+         "image": os.path.join("images", "photo", "baza11.jpg")},
+    ]
+    return data

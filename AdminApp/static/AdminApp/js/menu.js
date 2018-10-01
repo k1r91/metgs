@@ -26,7 +26,6 @@ $(document).ready(function () {
                 function (response) {
                     inner_form.html(response.html)
                     form.attr({'action': '/admin/menu/delete/' + response.id + '/'})
-                    console.log(response.id)
                 },
             error: function (xhr, status, error) {
                 console.log("error = ", error)

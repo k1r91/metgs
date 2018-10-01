@@ -2,7 +2,6 @@ $(document).ready(function () {
     $('input#id_image').change(function (e) {
         // display image near upload button
         for (var i = 0; i < e.originalEvent.srcElement.files.length; i++) {
-            console.log('here')
 
             var file = e.originalEvent.srcElement.files[i];
 
