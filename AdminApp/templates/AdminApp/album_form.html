@@ -24,9 +24,6 @@
                             <span class="glyphicon glyphicon-ban-circle"></span></a>
                     {% endfor %}
                 </div>
-                <label class="btn btn-primary" for="upload-file"><span id="span-plus"
-                                                                       class="glyphicon glyphicon-plus"></span></label>
-                <input id="upload-file" class="hidden" type="file" name="file_field" multiple/>
             </td>
         </tr>
         <input name="path" type="hidden" value={{ request.META.HTTP_REFERER }}>
@@ -38,11 +35,17 @@
     </table>
     {{ form.media }}
 </form>
+<form id="upload-form" action="/admin/upload/" method="post">
+    {% csrf_token %}
+    <label class="btn btn-primary" for="upload-file"><span id="span-plus"
+                                                           class="glyphicon glyphicon-plus"></span></label>
+    <input id="upload-file" class="hidden" type="file" name="file_field" multiple/>
+</form>
 <div class="remove-image hidden">
     <p>Удалить фотографию безвозвратно?</p>
     <form id="delete-image" action="" method="post">
         {% csrf_token %}
-        <input name="obj_id" type="hidden" value="{{ obj.id }}"/>
+        <input id="album_id" name="obj_id" type="hidden" value="{{ obj.id }}"/>
         <input id="photo_id" name="photo_id" type="hidden"/>
         <input class="btn btn-danger" type="submit" value="удалить"/>
         <button id="remove-cancel" class="btn btn-primary">Отмена</button>

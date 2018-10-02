@@ -29,5 +29,6 @@ urlpatterns = [
     path('album/add/', add_album),
     path('album/edit/<_id>/', edit_album),
     path('get_album/<_id>/', get_album),
-    path('image/delete/', delete_image)
+    path('image/delete/', delete_image),
+    path('upload/<_id>/', upload)
 ]

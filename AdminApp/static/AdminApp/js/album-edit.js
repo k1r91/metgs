@@ -75,30 +75,43 @@ $(document).ready(function () {
     //         console.log(i)
     //     }
     // })
-    $(function() {
-    // Multiple images preview in browser
-    var imagesPreview = function(input, placeToInsertImagePreview) {
+    $(function () {
+        // Multiple images preview in browser
+        var imagesPreview = function (input, placeToInsertImagePreview) {
 
-        if (input.files) {
-            var filesAmount = input.files.length;
+            if (input.files) {
+                var filesAmount = input.files.length;
 
-            for (i = 0; i < filesAmount; i++) {
-                var reader = new FileReader();
+                for (i = 0; i < filesAmount; i++) {
+                    var reader = new FileReader();
 
-                reader.onload = function(event) {
-                    image = $($.parseHTML('<img>'))
-                    image.attr('src', event.target.result).appendTo(placeToInsertImagePreview);
-                    image.css({'width': '200px', 'height': '150px'})
+                    reader.onload = function (event) {
+                        image = $($.parseHTML('<img>'))
+                        image.attr('src', event.target.result).appendTo(placeToInsertImagePreview);
+                        image.css({'width': '200px', 'height': '150px'})
+                    }
+                    reader.readAsDataURL(input.files[i]);
                 }
-
-                reader.readAsDataURL(input.files[i]);
+                var id = $('#album_id').val()
+                var data = new FormData($('#upload-form').get(0));
+                console.log(data)
+                $.ajax({
+                    url: '/admin/upload/' + id + '/',
+                    type: 'post',
+                    data: data,
+                    cache: false,
+                    processData: false,
+                    contentType: false,
+                    success: function (data) {
+                        alert('success');
+                    }
+                });
             }
-        }
 
-    };
+        };
 
-    $('input#upload-file').on('change', function() {
-        imagesPreview(this, 'div#images');
+        $('input#upload-file').on('change', function () {
+            imagesPreview(this, 'div#images');
+        });
     });
-});
 })

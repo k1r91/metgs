@@ -429,12 +429,12 @@ def edit_album(request, _id):
                       {'form': form, 'obj': obj, 'page': 'album', 'images': images})
     elif request.method == 'POST':
         form = PhotoAlbumForm(request.POST, request.FILES, instance=obj)
-        images = request.FILES.getlist('file_field')
-        for img in images:
-            image = PhotoImage()
-            image.album = obj
-            image.image = img
-            image.save()
+        # images = request.FILES.getlist('file_field')
+        # for img in images:
+        #     image = PhotoImage()
+        #     image.album = obj
+        #     image.image = img
+        #     image.save()
         if form.is_valid():
             form.save()
             return HttpResponseRedirect(request.POST.get('path'))
@@ -480,3 +480,14 @@ def delete_image(request):
     except ObjectDoesNotExist:
         response['errors'] = True
     return JsonResponse(response)
+
+def upload(request, _id):
+    if request.is_ajax() and request.user.is_staff:
+        files = request.FILES.getlist('file_field')
+        album = get_object_or_404(PhotoAlbum, pk=_id)
+        for file in files:
+            image = PhotoImage()
+            image.image = file
+            image.album = album
+            image.save()
+    return HttpResponseRedirect('/admin/album/')
