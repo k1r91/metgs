@@ -89,6 +89,15 @@ def fill_photo():
     print('Photos created.')
 
 
+def fill_news():
+    PhotoAlbum.objects.all().delete()
+    data = db_data.news()
+    for item in data:
+        news = News(**item)
+        news.save()
+    print('News created')
+
+
 if __name__ == '__main__':
     if os.path.exists('media'):
         shutil.rmtree('media')
@@ -98,4 +107,5 @@ if __name__ == '__main__':
     fill_good()
     fill_album()
     fill_photo()
+    fill_news()
     pass

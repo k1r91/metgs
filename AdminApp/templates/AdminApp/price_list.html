@@ -1,0 +1,114 @@
+{% extends 'AdminApp/base.html' %}
+{% load staticfiles %}
+{% block styles %}
+    {{ block.super }}
+{% endblock %}
+{% block fly %}
+    <div id="category-delete-container" class="hidden">
+        <form id="category-delete-form" action="" method="post">
+            {% csrf_token %}
+            <div id="category-delete-form-inner">
+                {% include 'AdminApp/inc_price_delete.html' %}
+            </div>
+        </form>
+    </div>
+{% endblock %}
+{% block content %}
+    <div class="content">
+        <div class="container-fluid">
+            <div class="row">
+                <div class="col-md-12">
+                    <div class="card">
+                        <div class="card-header card-header-primary">
+                            <h4 class="card-title ">Таблица прайс-листов</h4>
+                            <p class="card-category">Редактируйте прайс-листы</p>
+                        </div>
+                        <div class="card-body">
+                            <div class="table-responsive">
+                                <table class="table">
+                                    <thead class=" text-primary">
+                                    <th>Наименование</th>
+                                    <th style="min-width: 500px;">Описание</th>
+                                    <th>Файл</th>
+                                    </thead>
+                                    <tbody id="users-list">
+                                    {% for obj in objects %}
+                                        <tr>
+                                            <td>{{ obj.name | capfirst }}</td>
+                                            <td id="category-desc{{ obj.id }}">
+                                                <div id="short-{{ obj.id }}">{{ obj.short_desc | safe }}</div>
+                                                <div id="long-{{ obj.id }}"
+                                                     class="hidden">{{ obj.desc | safe }}</div>
+                                                <button id="btn-show-{{ obj.id }}" style="width:103px;"
+                                                        class="btn btn-sm btn-default"
+                                                        onclick="show_desc({{ obj.id }})">
+                                                    показать полностью
+                                                </button>
+                                                <button id="btn-hide-{{ obj.id }}" style="width:103px;"
+                                                        class="btn btn-sm btn-default hidden"
+                                                        onclick="hide_desc({{ obj.id }})">
+                                                    скрыть
+                                                </button>
+
+                                            </td>
+                                            <td>{% if obj.file %}
+                                                <a href="{{ obj.file.url }}">{{ obj.file.name }}</a>
+                                            {% else %}
+                                                Нет файла
+                                            {% endif %}
+                                            </td>
+                                            <td><a href="/admin/price/edit/{{ obj.id }}/"><span
+                                                    class="glyphicon glyphicon-edit"></span></a>
+                                                <a id="{{ obj.id }}" class="category-delete-link"
+                                                   href="/admin/price/delete/{{ obj.id }}/"><span
+                                                        class="glyphicon glyphicon-ban-circle"></span></a></td>
+                                        </tr>
+                                    {% endfor %}
+                                    </tbody>
+                                </table>
+                                <div class="pagination">
+                                <span class="step-links">
+                                        <a {% if objects.has_previous %}
+                                            href="?page={{ objects.previous_page_number }}"
+                                        {% else %}
+                                            href="#" class="disabled"
+                                        {% endif %}>
+                                                <span class="glyphicon glyphicon-circle-arrow-left"></span>
+                                            </a>
+                                    <span class="current">
+                                        Страница {{ objects.number }} из {{ objects.paginator.num_pages }}
+                                    </span>
+                                        <a{% if objects.has_next %}
+                                            href="?page={{ objects.next_page_number }}"
+                                        {% else %}
+                                            href="#" class="disabled"
+                                        {% endif %}>
+                                            <span class="glyphicon glyphicon-circle-arrow-right"></span>
+                                        </a>
+                                </span>
+                                    <div class="goto-page">
+                                        <label for="goto-page">Перейти на страницу:</label><input id="goto-page"/>
+                                        <a href="#" id="goto-page-link">
+                                            <button class="btn btn-primary btn-md">вперёд</button>
+                                        </a>
+                                    </div>
+                                    <a href="/admin/price/add/">
+                                        <button class="btn btn-success">добавить</button>
+                                    </a>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+{% endblock %}
+
+{% block title_inside %}
+    Прайс-листы
+{% endblock %}
+{% block scripts %}
+    {{ block.super }}
+    <script type="text/javascript" src="{% static "AdminApp/js/price.js" %}"></script>
+{% endblock %}

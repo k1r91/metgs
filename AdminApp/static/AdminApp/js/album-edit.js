@@ -80,18 +80,6 @@ $(document).ready(function () {
         var imagesPreview = function (input, placeToInsertImagePreview) {
 
             if (input.files) {
-                var filesAmount = input.files.length;
-
-                for (i = 0; i < filesAmount; i++) {
-                    var reader = new FileReader();
-
-                    reader.onload = function (event) {
-                        image = $($.parseHTML('<img>'))
-                        image.attr('src', event.target.result).appendTo(placeToInsertImagePreview);
-                        image.css({'width': '200px', 'height': '150px'})
-                    }
-                    reader.readAsDataURL(input.files[i]);
-                }
                 var id = $('#album_id').val()
                 var data = new FormData($('#upload-form').get(0));
                 console.log(data)
@@ -102,8 +90,22 @@ $(document).ready(function () {
                     cache: false,
                     processData: false,
                     contentType: false,
-                    success: function (data) {
-                        alert('success');
+                    success: function (response) {
+                        location.reload()
+                        // console.log(response)
+                        // var filesAmount = input.files.length;
+                        //
+                        // for (i = 0; i < filesAmount; i++) {
+                        //     var reader = new FileReader();
+                        //
+                        //     reader.onload = function (event) {
+                        //         image = $($.parseHTML('<img>'))
+                        //         image.attr('src', event.target.result).appendTo(placeToInsertImagePreview);
+                        //         image.css({'width': '200px', 'height': '150px'})
+                        //     }
+                        //     reader.readAsDataURL(input.files[i]);
+                        // }
+                        // $('input#upload-file').val("")
                     }
                 });
             }

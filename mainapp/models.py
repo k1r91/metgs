@@ -15,15 +15,16 @@ class TopMenu(models.Model):
 
 
 class Organization(models.Model):
-    logo = models.ImageField(upload_to='logo')
-    phone = models.CharField(max_length=64, blank=True, null=True)
-    phone_prefix = models.CharField(max_length=10, blank=True, null=True)
-    email = models.CharField(max_length=256, blank=True, null=True)
-    contact_text = models.CharField(max_length=128, blank=True, null=True)
-    footer_email = models.EmailField(blank=True, null=True)
-    footer_desc = models.TextField(blank=True, null=True)
-    footer_phone = models.CharField(max_length=64, blank=True, null=True)
-    name = models.CharField(max_length=64, blank=True, null=True)
+    logo = models.ImageField(upload_to='logo', verbose_name="Логотип")
+    desc = HTMLField(verbose_name="О компании", blank=True, null=True)
+    phone = models.CharField(max_length=64, blank=True, null=True, verbose_name="Телефон")
+    phone_prefix = models.CharField(max_length=10, blank=True, null=True, verbose_name="Код города")
+    email = models.CharField(max_length=256, blank=True, null=True, verbose_name="Электронная почта")
+    contact_text = models.CharField(max_length=128, blank=True, null=True, verbose_name="Контактный текст")
+    footer_email = models.EmailField(blank=True, null=True, verbose_name="Email в футере")
+    footer_desc = models.TextField(blank=True, null=True, verbose_name="Описание в футере")
+    footer_phone = models.CharField(max_length=64, blank=True, null=True, verbose_name="Телефон в футере")
+    name = models.CharField(max_length=64, blank=True, null=True, verbose_name="Наименование")
 
 
 class Category(models.Model):
@@ -63,3 +64,15 @@ class PhotoImage(models.Model):
     desc = HTMLField(blank=True, null=True, verbose_name="Описание")
     name = models.CharField(max_length=128, verbose_name="Наименовение", blank=True, null=True)
     visible = models.BooleanField(default=True, verbose_name="Видимость")
+
+
+class Price(models.Model):
+    name = models.CharField(max_length=128, verbose_name="Наименовение", blank=True, null=True)
+    desc = HTMLField(blank=True, null=True, verbose_name="Описание")
+    file = models.FileField(verbose_name="Файл", blank=True, null=True, upload_to='price')
+
+
+class News(models.Model):
+    name = models.CharField(max_length=256, verbose_name="Наименовение")
+    desc = HTMLField(verbose_name="Содержание")
+    date = models.DateTimeField(auto_now_add=True, blank=True)
