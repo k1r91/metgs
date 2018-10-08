@@ -527,3 +527,46 @@ def news():
          },
     ]
     return data
+
+
+def contact():
+    data = [
+        {"name": "Головной офис",
+         "desc": "",
+         "map": """<iframe src="https://yandex.ru/map-widget/v1/-/CBB7fAqQ0B" width="560" height="400" frameborder="1" 
+         allowfullscreen="true"></iframe>""",
+         "phone": "+7-343-362-29-00",
+         "address": "г. Екатеринбург, ул. Начдива Васильева, 3а",
+         "position": "",
+         },
+        {"name": "Производственная база",
+         "desc": "",
+         "map": """<iframe src="https://yandex.ru/map-widget/v1/-/CBB7fIumwD" width="560" height="400" frameborder="1" 
+         allowfullscreen="true"></iframe>""",
+         "phone": "+7-343-323-32-18",
+         "address": "г. Екатеринбург, ул. Монтажников, 32а",
+         "position": "",
+         },
+        {"name": "Трачук Александр Федосеевич",
+         "desc": "",
+         "map": "",
+         "phone": "",
+         "address": "",
+         "position": "Директор",
+         },
+        {"name": "Анисимова Любовь Юрьевна",
+         "desc": "",
+         "map": "",
+         "phone": "",
+         "address": "",
+         "position": "Главный бухгалтер",
+         },
+        {"name": "Юткин Александр Иванович",
+         "desc": "",
+         "map": "",
+         "phone": "+7-343-362-29-00",
+         "address": "г. Екатеринбург, ул. Начдива Васильева, 3а",
+         "position": "Отдел продаж",
+         },
+    ]
+    return data

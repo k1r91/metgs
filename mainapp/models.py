@@ -76,3 +76,12 @@ class News(models.Model):
     name = models.CharField(max_length=256, verbose_name="Наименовение")
     desc = HTMLField(verbose_name="Содержание")
     date = models.DateTimeField(auto_now_add=True, blank=True)
+
+
+class Contact(models.Model):
+    name = models.CharField(max_length=256, verbose_name="Наименовение")
+    desc = HTMLField(blank=True, null=True, verbose_name="Описание")
+    map = models.CharField(max_length=256, verbose_name="Ссылка на карту", blank=True, null=True)
+    phone = models.CharField(max_length=64, blank=True, null=True, verbose_name="Телефон")
+    address = models.TextField(verbose_name="Адрес", blank=True, null=True)
+    position = models.CharField(max_length=64, verbose_name="Должность", blank=True, null=True)

@@ -43,7 +43,11 @@ urlpatterns = [
     path('get_news/<_id>/', get_news),
     path('about/', list_organization),
     path('about/delete/<_id>/', delete_organization),
-    path('about/add/', add_news),
     path('about/edit/<_id>/', edit_organization),
     path('get_organization/<_id>/', get_organization),
+    path('contact/', list_contact),
+    path('contact/delete/<_id>/', delete_contact),
+    path('contact/add/', add_contact),
+    path('contact/edit/<_id>/', edit_contact),
+    path('get_contact/<_id>/', get_contact),
 ]

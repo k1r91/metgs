@@ -1,0 +1,93 @@
+{% extends 'AdminApp/base.html' %}
+{% load staticfiles %}
+{% block styles %}
+    {{ block.super }}
+{% endblock %}
+{% block fly %}
+    <div id="category-delete-container" class="hidden">
+        <form id="category-delete-form" action="" method="post">
+            {% csrf_token %}
+            <div id="category-delete-form-inner">
+                {% include 'AdminApp/inc_organization_delete.html' %}
+            </div>
+        </form>
+    </div>
+{% endblock %}
+{% block content %}
+    <div class="content">
+        <div class="container-fluid">
+            <div class="row">
+                <div class="col-md-12">
+                    <div class="card">
+                        <div class="card-header card-header-primary">
+                            <h4 class="card-title ">Таблица организаций</h4>
+                            <p class="card-category">Редактируйте организации</p>
+                        </div>
+                        <div class="card-body">
+                            <div class="table-responsive">
+                                <table class="table">
+                                    <thead class=" text-primary">
+                                    <th>Наименование</th>
+                                    <th style="min-width: 500px;">Описание</th>
+                                    <th>Логотип</th>
+                                    <th>Телефон</th>
+                                    <th>Префикс телефона</th>
+                                    <th>Email</th>
+                                    <th>Текст для контактов</th>
+                                    <th>Email в футере</th>
+                                    <th>Телефон в футере</th>
+                                    <th>Описание в футере</th>
+                                    </thead>
+                                    <tbody id="users-list">
+                                    {% for obj in objects %}
+                                        <tr>
+                                            <td>{{ obj.name | capfirst }}</td>
+                                            <td id="category-desc{{ obj.id }}">
+                                                <div id="short-{{ obj.id }}">{{ obj.short_desc | safe }}</div>
+                                                <div id="long-{{ obj.id }}"
+                                                     class="hidden">{{ obj.desc | safe }}</div>
+                                                <button id="btn-show-{{ obj.id }}" style="width:103px;"
+                                                        class="btn btn-sm btn-default"
+                                                        onclick="show_desc({{ obj.id }})">
+                                                    показать полностью
+                                                </button>
+                                                <button id="btn-hide-{{ obj.id }}" style="width:103px;"
+                                                        class="btn btn-sm btn-default hidden"
+                                                        onclick="hide_desc({{ obj.id }})">
+                                                    скрыть
+                                                </button>
+
+                                            </td>
+                                            <td><img style="width:200px;" src="{{ obj.logo.url }}" /></td>
+                                            <td>{{ obj.phone }}</td>
+                                            <td>{{ obj.phone_prefix }}</td>
+                                            <td>{{ obj.email }}</td>
+                                            <td>{{ obj.contact_text }}</td>
+                                            <td>{{ obj.footer_email }}</td>
+                                            <td>{{ obj.footer_phone }}</td>
+                                            <td>{{ obj.footer_desc }}</td>
+                                            <td><a href="/admin/about/edit/{{ obj.id }}/"><span
+                                                    class="glyphicon glyphicon-edit"></span></a>
+                                                <a id="{{ obj.id }}" class="category-delete-link"
+                                                   href="/admin/about/delete/{{ obj.id }}/"><span
+                                                        class="glyphicon glyphicon-ban-circle"></span></a></td>
+                                        </tr>
+                                    {% endfor %}
+                                    </tbody>
+                                </table>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+{% endblock %}
+
+{% block title_inside %}
+    Организация
+{% endblock %}
+{% block scripts %}
+    {{ block.super }}
+    <script type="text/javascript" src="{% static "AdminApp/js/organization.js" %}"></script>
+{% endblock %}

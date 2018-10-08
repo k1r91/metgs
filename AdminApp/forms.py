@@ -1,7 +1,7 @@
 from django import forms
 from django.contrib.auth.forms import UserCreationForm
 from django.contrib.auth.models import User
-from mainapp.models import Category, Good, TopMenu, PhotoAlbum, Price, News, Organization
+from mainapp.models import Category, Good, TopMenu, PhotoAlbum, Price, News, Organization, Contact
 
 
 class UserEditFrom(UserCreationForm):
@@ -62,7 +62,13 @@ class NewsForm(forms.ModelForm):
         fields = '__all__'
 
 
-class Organization(forms.ModelForm):
+class OrganizationForm(forms.ModelForm):
     class Meta:
         model = Organization
+        fields = '__all__'
+
+
+class ContactForm(forms.ModelForm):
+    class Meta:
+        model = Contact
         fields = '__all__'

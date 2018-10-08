@@ -95,7 +95,16 @@ def fill_news():
     for item in data:
         news = News(**item)
         news.save()
-    print('News created')
+    print('News created.')
+
+
+def fill_contact():
+    Contact.objects.all().delete()
+    data = db_data.contact()
+    for item in data:
+        obj = Contact(**item)
+        obj.save()
+    print('Contacts created.')
 
 
 if __name__ == '__main__':
@@ -108,4 +117,5 @@ if __name__ == '__main__':
     fill_album()
     fill_photo()
     fill_news()
+    fill_contact()
     pass

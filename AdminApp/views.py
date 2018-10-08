@@ -10,8 +10,9 @@ from django.template.context_processors import csrf
 from django.core.exceptions import ObjectDoesNotExist
 from django.core.files.images import ImageFile
 
-from AdminApp.forms import UserEditFrom, CategoryForm, GoodForm, TopMenuForm, PhotoAlbumForm, PriceForm, NewsForm
-from mainapp.models import Category, Good, TopMenu, PhotoAlbum, PhotoImage, Price, News
+from AdminApp.forms import UserEditFrom, CategoryForm, GoodForm, TopMenuForm, PhotoAlbumForm, PriceForm, NewsForm, \
+    OrganizationForm, ContactForm
+from mainapp.models import Category, Good, TopMenu, PhotoAlbum, PhotoImage, Price, News, Organization, Contact
 
 
 def create_context(page=None, objects=None, form=None, obj=None):
@@ -495,7 +496,7 @@ def upload(request, _id):
             image.image = file
             image.album = album
             image.save()
-            response['id-'+ str(i)] = image.pk
+            response['id-' + str(i)] = image.pk
         return JsonResponse(response)
     else:
         raise Http404
@@ -673,7 +674,7 @@ def delete_news(request, _id):
 def list_organization(request):
     if not request.user.is_staff:
         raise Http404
-    objects = News.objects.all()
+    objects = Organization.objects.all()
     paginator = Paginator(objects, 10)
     page = request.GET.get('page')
     try:
@@ -689,48 +690,31 @@ def list_organization(request):
         else:
             obj.short_desc = ""
     context = create_context(page='about', objects=objects)
-    return render(request, 'AdminApp/news_list.html', context)
-
-
-def add_organization(request):
-    if not request.user.is_staff:
-        raise Http404
-    if request.method == 'GET':
-        form = NewsForm()
-        context = create_context(page='about', form=form)
-        return render(request, 'AdminApp/news_add.html', context)
-    elif request.method == 'POST':
-        form = NewsForm(request.POST)
-        context = create_context(page='news', form=form)
-        if form.is_valid():
-            form.save()
-            return HttpResponseRedirect(request.POST.get('path'))
-        else:
-            return render(request, 'AdminApp/news_add.html', context)
+    return render(request, 'AdminApp/organization_list.html', context)
 
 
 def edit_organization(request, _id):
     if not request.user.is_staff:
         raise Http404
-    obj = get_object_or_404(News, id=_id)
+    obj = get_object_or_404(Organization, id=_id)
     context = create_context(page='about', obj=obj)
     if request.method == 'GET':
-        form = NewsForm(instance=obj)
+        form = OrganizationForm(instance=obj)
         context['form'] = form
-        return render(request, 'AdminApp/news_edit.html', context)
+        return render(request, 'AdminApp/organization_edit.html', context)
     elif request.method == 'POST':
-        form = NewsForm(request.POST, instance=obj)
+        form = OrganizationForm(request.POST, request.FILES, instance=obj)
         if form.is_valid():
             form.save()
             return HttpResponseRedirect(request.POST.get('path'))
         else:
-            return render(request, 'AdminApp/news_edit.html', context)
+            return render(request, 'AdminApp/organization_edit.html', context)
 
 
 def get_organization(request, _id):
-    obj = get_object_or_404(News, id=_id)
+    obj = get_object_or_404(Organization, id=_id)
     context = {'obj': obj}
-    html = loader.render_to_string('AdminApp/inc_news_delete.html', context)
+    html = loader.render_to_string('AdminApp/inc_organization_delete.html', context)
     response = {'html': html, 'id': _id}
     return JsonResponse(response)
 
@@ -744,7 +728,89 @@ def delete_organization(request, _id):
     """
     if request.method == 'POST':
         if request.user.is_staff:
-            obj = get_object_or_404(News, id=_id)
+            obj = get_object_or_404(Organization, id=_id)
+            obj.delete()
+            return HttpResponseRedirect(request.META.get('HTTP_REFERER'))
+    raise Http404
+
+# CRUD for contacts ###################################################################################################
+
+
+def list_contact(request):
+    if not request.user.is_staff:
+        raise Http404
+    objects = Contact.objects.all()
+    paginator = Paginator(objects, 10)
+    page = request.GET.get('page')
+    try:
+        objects = paginator.page(page)
+    except PageNotAnInteger:
+        objects = paginator.page(1)
+    except EmptyPage:
+        objects = paginator.page(paginator.num_pages)
+    for obj in objects:
+        if obj.desc:
+            desc = obj.desc.split(' ')
+            obj.short_desc = ' '.join(desc[:15])
+        else:
+            obj.short_desc = ""
+    context = create_context(page='contact', objects=objects)
+    return render(request, 'AdminApp/contact_list.html', context)
+
+
+def add_contact(request):
+    if not request.user.is_staff:
+        raise Http404
+    if request.method == 'GET':
+        form = ContactForm()
+        context = create_context(page='contact', form=form)
+        return render(request, 'AdminApp/contact_add.html', context)
+    elif request.method == 'POST':
+        form = ContactForm(request.POST)
+        context = create_context(page='contact', form=form)
+        if form.is_valid():
+            form.save()
+            return HttpResponseRedirect(request.POST.get('path'))
+        else:
+            return render(request, 'AdminApp/contact_add.html', context)
+
+
+def edit_contact(request, _id):
+    if not request.user.is_staff:
+        raise Http404
+    obj = get_object_or_404(Contact, id=_id)
+    context = create_context(page='contact', obj=obj)
+    if request.method == 'GET':
+        form = ContactForm(instance=obj)
+        context['form'] = form
+        return render(request, 'AdminApp/contact_edit.html', context)
+    elif request.method == 'POST':
+        form = ContactForm(request.POST, instance=obj)
+        if form.is_valid():
+            form.save()
+            return HttpResponseRedirect(request.POST.get('path'))
+        else:
+            return render(request, 'AdminApp/contact_edit.html', context)
+
+
+def get_contact(request, _id):
+    obj = get_object_or_404(Contact, id=_id)
+    context = {'obj': obj}
+    html = loader.render_to_string('AdminApp/inc_contact_delete.html', context)
+    response = {'html': html, 'id': _id}
+    return JsonResponse(response)
+
+
+def delete_contact(request, _id):
+    """
+    delete category object and redirect to previous pagination view, to certain page
+    :param request:
+    :param _id:
+    :return:
+    """
+    if request.method == 'POST':
+        if request.user.is_staff:
+            obj = get_object_or_404(Contact, id=_id)
             obj.delete()
             return HttpResponseRedirect(request.META.get('HTTP_REFERER'))
     raise Http404
