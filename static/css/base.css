@@ -532,3 +532,41 @@ ul.menu li {
     float: left;
     padding: 0 10px;
 }
+
+aside .box {
+    background: #f0f0f0;
+    -moz-border-radius: 0;
+    -webkit-border-radius: 0;
+    border-radius: 0;
+    position: relative;
+    text-align: left;
+    width: 100%;
+    margin-bottom: 7px;
+}
+
+.news .item {
+    padding: 0;
+    overflow: hidden;
+}
+
+.news .item .txt {
+    font-size: 11px;
+    line-height: 13px;
+    color: #7a7a7a;
+}
+
+.news .item .date {
+    padding-bottom: 5px;
+    padding: 0;
+    font-size: 11px;
+    color: #000;
+    font-weight: bold;
+}
+
+.label.label-styled {
+    background: #c44a1d;
+}
+
+aside .box .inner {
+    padding: 10px 10px 10px 25px;
+}

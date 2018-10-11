@@ -6,6 +6,7 @@
     {% block styles %}
         <link rel="stylesheet" href="{% static "css/base.css" %}"/>
         <link rel="stylesheet" href="{% static "css/bootstrap.css" %}"/>
+        <link rel="stylesheet" href="{% static "css/bootstrap3.css" %}"/>
     {% endblock %}
     {% block title %}
         <title>ЗАО "МеталлГазСнаб"</title>
@@ -125,6 +126,28 @@
                                 {% endfor %}
                             </ul>
                         </div>
+                    </div>
+                    <div class="box news">
+                        <div class="title">
+                            <span><a href="/news/" style="color:inherit;">Новости</a></span>
+                        </div>
+                        <div class="inner">
+                            <div class="news">
+                                <div class="item">
+                                    <div class="txt">
+                                        <div class="date"><span style="font-size: 12px;" class="label label-styled">27.05.16</span>
+                                        </div>
+                                        <a href="/news/32">Распродажа остатков металлопроката согласно прайс-листу </a>
+                                        <div class="desc">Распродажа остатков металлопроката согласно прайс-листу</div>
+                                    </div>
+                                </div>
+                                <hr class="double dotted">
+                            </div><!--news -->
+                            <div class="lt"></div>
+                            <div class="rt"></div>
+                        </div>
+                        <div class="rb"></div>
+                        <div class="lb"></div>
                     </div>
                 </aside>
                 <div id="center">

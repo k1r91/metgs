@@ -43,14 +43,13 @@
             <span>
             <form action="/search/" method="GET">
                 <div class="input-append">
-                  <input style="width:240px;" name="q" type="text" placeholder="Поиск по наименованию товара, артикулу">
-                  <button class="btn styled" type="submit"><i class="icon-search icon-white"></i></button>
+                  <input style="width:360px; font-size: 12px;" name="q" type="text"
+                         placeholder="Поиск по наименованию товара, артикулу">
+                  <button style="background-color: #f96332;" class="btn styled" type="submit">
+                      <span class="glyphicon glyphicon-search"></span></button>
                 </div>
             </form>
             </span>
         </div>
     </div>
-{% endblock %}
-{% block scripts %}
-    {{ block.super }}
 {% endblock %}
