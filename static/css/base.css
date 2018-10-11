@@ -565,6 +565,7 @@ aside .box {
 
 .label.label-styled {
     background: #c44a1d;
+    line-height: 32px;
 }
 
 aside .box .inner {
