@@ -56,6 +56,7 @@ class PhotoAlbum(models.Model):
     name = models.CharField(max_length=128, verbose_name="Наименовение")
     desc = HTMLField(blank=True, null=True, verbose_name="Описание")
     visible = models.BooleanField(default=True, verbose_name="Видимость")
+    main_page = models.BooleanField(default=False, verbose_name="На главной странице?")
 
 
 class PhotoImage(models.Model):

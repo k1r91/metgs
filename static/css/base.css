@@ -11,6 +11,10 @@ div {
     display: block;
 }
 
+div.header .aligner .bg {
+    min-height: 224px;
+}
+
 div.wrap {
     background-image: url("../pic/bg_carrot.jpg");
     height: auto !important;
@@ -23,10 +27,6 @@ div.wrap {
     font: inherit;
     font-size: 100%;
     vertical-align: baseline;
-}
-
-div.header {
-    height: 224px;
 }
 
 div.header-topper {
@@ -147,6 +147,7 @@ div.header div.aligner > div.bg {
     background: #ffffff;
     position: relative;
     z-index: 2;
+    padding-bottom: 50px;
 }
 
 div.basket {
@@ -463,4 +464,71 @@ ul.menu li {
     padding-right: 5px;
     font-weight: bold;
     text-decoration: none;
+}
+
+#topslider {
+    margin-bottom: 92px;
+    top: 106px;
+    position: relative;
+}
+
+#topslider .position {
+    position: relative;
+    height: 1%;
+    text-align: center;
+    padding: 9px;
+}
+
+#topslider .cut {
+    width: 726px;
+    display: inline-block;
+    margin: 0 auto;
+    height: 276px;
+    position: relative;
+    overflow: hidden;
+    background: #fff;
+}
+
+#topslider .prev, #topslider .next {
+    position: absolute;
+    z-index: 1000;
+    width: 74px;
+    top: 20px;
+    height: 283px;
+    margin-top: -36px;
+}
+
+#center {
+    margin-left: 265px;
+    margin-right: 20px;
+}
+
+.cut {
+    position: relative;
+    width: 100%;
+    overflow: hidden;
+    -webkit-box-shadow: 4px 4px 19px -1px rgba(0, 0, 0, 0.75);
+    -moz-box-shadow: 4px 4px 19px -1px rgba(0, 0, 0, 0.75);
+    box-shadow: 4px 4px 19px -1px rgba(0, 0, 0, 0.75);
+}
+
+#top_panel {
+}
+
+#top_panel {
+    background: url(../pic/main_filter.png) no-repeat 0 0;
+    color: #fff;
+    height: 77px;
+    padding-top: 22px;
+    padding-left: 15px;
+    border: none;
+    font-family: Verdana;
+    margin-bottom: 14px;
+}
+
+#top_panel > div > span {
+    font-size: 14px;
+    display: inline-block;
+    float: left;
+    padding: 0 10px;
 }

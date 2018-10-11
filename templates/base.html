@@ -5,7 +5,7 @@
     <meta charset="UTF-8">
     {% block styles %}
         <link rel="stylesheet" href="{% static "css/base.css" %}"/>
-        <link rel="stylesheet" href="{% static "css/bootstrap.min.css" %}"/>
+        <link rel="stylesheet" href="{% static "css/bootstrap.css" %}"/>
     {% endblock %}
     {% block title %}
         <title>ЗАО "МеталлГазСнаб"</title>
@@ -103,6 +103,8 @@
                             </span>
                     </div>
                 </div>
+                {% block topslider %}
+                {% endblock %}
             </div>
         </div>
     </div>
@@ -125,8 +127,10 @@
                         </div>
                     </div>
                 </aside>
-                {% block content %}
-                {% endblock %}
+                <div id="center">
+                    {% block content %}
+                    {% endblock %}
+                </div>
             </div>
         </div>
     </div>
@@ -150,10 +154,10 @@
         </div>
     </div>
 </div>
-</div>
 {% block scripts %}
     <script src="{% static "js/jquery-3.3.1.min.js" %}"></script>
     <script src="{% static "js/base.js" %}"></script>
+    <script src="{% static "js/bootstrap.min.js" %}"></script>
 {% endblock %}
 </body>
 </html>

@@ -1,7 +1,8 @@
 from django.shortcuts import render
-from mainapp.models import Category, TopMenu, Organization
+from mainapp.models import Category, TopMenu, Organization, PhotoAlbum, PhotoImage
 
 # Create your views here.
+
 
 def get_common_context():
     categories = Category.objects.all()
@@ -12,4 +13,8 @@ def get_common_context():
 
 def index(request):
     context = get_common_context()
+    query_album = PhotoAlbum.objects.filter(main_page=True)
+    if query_album:
+        album = query_album[0]
+    context['album'] = album
     return render(request, 'index.html', context)

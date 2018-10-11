@@ -1,2 +1,56 @@
 {% extends 'base.html' %}
 {% load staticfiles %}
+{% block topslider %}
+    <div id="topslider">
+    <div class="position">
+        {#            <a href="#" class="prev"></a>#}
+        {#            <a href="#" class="next"></a>#}
+        <div class="cut">
+            <div id="head-carousel" class="carousel slide" data-ride="carousel">
+                <ul class="carousel-indicators">
+                    {% for img in album.photoimage_set.all %}
+                        <li data-target="#head-carousel" data-slide-to="{{ forloop.counter0 }}"
+                            {% if forloop.counter0 == 0 %}class="active">{% endif %}</li>
+                    {% endfor %}
+                </ul>
+                <div class="carousel-inner">
+                    {% for img in album.photoimage_set.all %}
+                        <div class="carousel-item {% if forloop.counter0 == 0 %}active{% endif %}">
+                            <img src="{{ img.image.url }}" alt="Chicago" width="100%" height="100%">
+                            <div class="carousel-caption">
+                                {% if img.name %}<h3>{{ img.name }}</h3>{% endif %}
+                                {% if img.desc %}<p>{{ img.desc }}</p>{% endif %}
+                            </div>
+                        </div>
+                    {% endfor %}
+                    <a class="carousel-control-prev" href="#head-carousel" data-slide="prev">
+                        <span class="carousel-control-prev-icon"></span>
+                    </a>
+                    <a class="carousel-control-next" href="#head-carousel" data-slide="next">
+                        <span class="carousel-control-next-icon"></span>
+                    </a>
+                </div>
+            </div>
+
+        </div>
+    </div>
+{% endblock %}
+
+{% block content %}
+    <div id="top_panel">
+        <div>
+            <span>Поиск по каталогу: &nbsp;&nbsp;</span>
+            <span>
+            <form action="/search/" method="GET">
+                <div class="input-append">
+                  <input style="width:240px;" name="q" type="text" placeholder="Поиск по наименованию товара, артикулу">
+                  <button class="btn styled" type="submit"><i class="icon-search icon-white"></i></button>
+                </div>
+            </form>
+            </span>
+        </div>
+    </div>
+{% endblock %}
+{% block scripts %}
+    {{ block.super }}
+{% endblock %}

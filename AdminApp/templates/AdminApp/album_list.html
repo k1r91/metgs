@@ -29,7 +29,7 @@
                                     <thead class=" text-primary">
                                     <th>Наименование</th>
                                     <th style="min-width: 500px;">Описание</th>
-                                    <th>Изображение</th>
+                                    <th>На главной странице?</th>
                                     <th>Видимость</th>
                                     </thead>
                                     <tbody id="users-list">
@@ -52,12 +52,7 @@
                                                 </button>
 
                                             </td>
-                                            <td>{% if obj.image %}
-                                                <img src="{{ obj.image.url }}" style="width: 100px;"/>
-                                            {% else %}
-                                                Нет изображения
-                                            {% endif %}
-                                            </td>
+                                            <td>{% if obj.main_page %} Да {% else %} Нет {% endif %}</td>
                                             <td>{% if obj.visible %}Да{% else %}Нет{% endif %}</td>
                                             <td><a href="/admin/album/edit/{{ obj.id }}/"><span
                                                     class="glyphicon glyphicon-edit"></span></a>

@@ -90,7 +90,7 @@ def fill_photo():
 
 
 def fill_news():
-    PhotoAlbum.objects.all().delete()
+    News.objects.all().delete()
     data = db_data.news()
     for item in data:
         news = News(**item)
