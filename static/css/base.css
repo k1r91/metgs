@@ -338,7 +338,7 @@ span.glyphicon.glyphicon-user {
     background: #fff;
     padding: 0;
     height: 100%;
-    min-height: 300px;
+    min-height: 1265px;
 }
 
 .footer .inner {
@@ -647,4 +647,17 @@ img {
 #center .box.unstyled, aside .box.unstyled {
     background: none;
     border: none;
+}
+
+aside img {
+    width: 190px;
+    height: 150px;
+}
+
+element.style {
+}
+
+div.main_menu a.active {
+    text-decoration: underline;
+    color: #66afe9;
 }

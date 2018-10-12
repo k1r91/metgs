@@ -5,7 +5,6 @@ def top_menu():
     data = [
         {"name": "Новости", "slug": "news", "visible": True, "desc": None, "system": True},
         {"name": "Каталог", "slug": "catalogue", "visible": True, "desc": None, "system": True},
-        {"name": "Справочник", "slug": "handbook", "visible": True, "desc": None, "system": True},
         {"name": "прайс товаров, услуг", "slug": "price", "visible": True, "desc": None, "system": True},
         {"name": "фотогалерея базы", "slug": "gallery", "visible": True, "desc": None, "system": True},
         {"name": "о компании", "slug": "about", "visible": True, "desc": None, "system": True},

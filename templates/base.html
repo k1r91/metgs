@@ -27,7 +27,8 @@
                         {% for menu in menu_list %}
                             {% if menu.visible %}
                                 <li>
-                                    <a href="/{{ menu.slug }}/">{{ menu.name|upper }}</a>
+                                    <a href="/{{ menu.slug }}/"
+                                       class="{% if page == menu.slug %}active{% endif %}">{{ menu.name|upper }}</a>
                                 </li>
                             {% endif %}
                         {% endfor %}
@@ -127,6 +128,18 @@
                             </ul>
                         </div>
                     </div>
+                    <div class="box">
+                        <div class="title">
+                            <span>Случайное фото</span>
+                        </div>
+                        <div class="inner">
+                            <div class="imgitem ib"><a
+                                    href="{{ random_photo.image.url }}"
+                                    class="popup" rel="gallery"><img alt="{{ random_photo.image.name }}"
+                                                                     src="{{ random_photo.image.url }}">
+                            </a></div>
+                        </div>
+                        <a href="/gallery/">← Все альбомы</a></div>
                     <div class="box news">
                         <div class="title">
                             <span><a href="/news/" style="color:inherit;">Новости</a></span>
