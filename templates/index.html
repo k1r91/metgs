@@ -16,7 +16,7 @@
                 <div class="carousel-inner">
                     {% for img in album.photoimage_set.all %}
                         <div class="carousel-item {% if forloop.counter0 == 0 %}active{% endif %}">
-                            <img src="{{ img.image.url }}" alt="Chicago" width="100%" height="100%">
+                            <img src="{{ img.image.url }}" alt="Chicago" width="726px" height="276px">
                             <div class="carousel-caption">
                                 {% if img.name %}<h3>{{ img.name }}</h3>{% endif %}
                                 {% if img.desc %}<p>{{ img.desc }}</p>{% endif %}
@@ -43,13 +43,40 @@
             <span>
             <form action="/search/" method="GET">
                 <div class="input-append">
-                  <input style="width:360px; font-size: 12px;" name="q" type="text"
+                  <input style="color: black; width:360px; font-size: 12px;" name="q" type="text"
                          placeholder="Поиск по наименованию товара, артикулу">
                   <button style="background-color: #f96332;" class="btn styled" type="submit">
                       <span class="glyphicon glyphicon-search"></span></button>
                 </div>
             </form>
             </span>
+        </div>
+    </div>
+    <div class="box">
+    </div>
+    <div class="box">
+        <div class="title">
+            <span>Каталог</span>
+        </div>
+        <div class="inner main-catalog">
+            {% for cat in categories %}
+
+                <div class="oh item">
+                    <div class="oh">
+                        <a href="/catalog/{{ cat.id }}/">
+                            {% if cat.image %}<img
+                                    src="{{ cat.image.url }}"
+                                    alt="{{ cat.name | capfirst }}"></a>
+                            {% endif %}
+                    </div>
+                    <div class="oh">
+                        <div class="title"><a href="/catalog/{{ cat.id }}/">{{ cat.name | capfirst }}</a></div>
+                        <ul class="nolist">
+                        </ul>
+                    </div>
+                </div>
+            {% endfor %}
+            <div class="cl"></div>
         </div>
     </div>
 {% endblock %}

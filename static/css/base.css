@@ -342,7 +342,7 @@ span.glyphicon.glyphicon-user {
 }
 
 .footer .inner {
-    height: 212px;
+    height: 211px;
     background: transparent url(../pic/denim_pattern.png) repeat-x left bottom;
     position: relative;
     bottom: -7px;
@@ -570,4 +570,65 @@ aside .box {
 
 aside .box .inner {
     padding: 10px 10px 10px 25px;
+}
+
+#center .box {
+    border: 2px solid #971F0C;
+}
+
+#center .box > .title {
+    background: url(../images/carrot/title1.png) no-repeat center 0;
+}
+
+#center .box > .title {
+    background: url(../pic/title1.png) no-repeat center 0;
+    height: 40px;
+    text-align: center;
+    display: inline-block;
+    text-decoration: none;
+    padding-bottom: 10px;
+    width: 388px;
+    position: relative;
+    left: -10px;
+    top: -2px;
+}
+
+.box {
+    position: relative;
+    background: #fff;
+    margin-bottom: 14px;
+}
+
+#center .box .inner.main-catalog {
+    overflow: hidden;
+    height: 1%;
+    zoom: 1;
+    padding: 10px;
+    font-family: "Trebuchet MS";
+}
+
+.main-catalog > .item {
+    min-height: 250px;
+}
+
+.oh, .ot, .tt {
+    float: left;
+    padding: 0 2% 2% 0;
+    width: 48%;
+}
+
+#center a, aside #enter a, aside #login a {
+    color: #000;
+}
+
+.main-catalog img {
+    padding: 0 10px 10px 0;
+    max-width: 100%;
+}
+
+img {
+    height: auto;
+    border: 0;
+    -ms-interpolation-mode: bicubic;
+    vertical-align: middle;
 }

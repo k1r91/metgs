@@ -13,8 +13,10 @@ def get_common_context():
 
 def index(request):
     context = get_common_context()
+    categories = Category.objects.all()
     query_album = PhotoAlbum.objects.filter(main_page=True)
     if query_album:
         album = query_album[0]
     context['album'] = album
+    context['categories'] = categories
     return render(request, 'index.html', context)
