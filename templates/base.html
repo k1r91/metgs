@@ -135,10 +135,11 @@
                             <div class="news">
                                 <div class="item">
                                     <div class="txt">
-                                        <div class="date"><span style="font-size: 12px;" class="label label-styled">27.05.16</span>
+                                        <div class="date"><span style="font-size: 12px;"
+                                                                class="label label-styled">{{ news.date|date:"d.m.Y" }}</span>
                                         </div>
-                                        <a href="/news/32">Распродажа остатков металлопроката согласно прайс-листу </a>
-                                        <div class="desc">Распродажа остатков металлопроката согласно прайс-листу</div>
+                                        <a href="/news/{{ news.id }}">{{ news.name }}</a>
+                                        <div class="desc">{{ news.desc | safe }}</div>
                                     </div>
                                 </div>
                                 <hr class="double dotted">
@@ -149,6 +150,29 @@
                         <div class="rb"></div>
                         <div class="lb"></div>
                     </div>
+                    <section class="box contact">
+                        <div class="title">
+                            <a href="/contact/"><span>Контакты</span></a>
+                        </div>
+                        <div>
+                            <ul>
+                                <li class="icon adress">
+                                    <i></i>
+                                    <span>
+				<div>г. Екатеринбург, ул. Монтажников, 32а
+                    <!--s_links--><!--check code--><!--/s_links--></div>
+				<br>
+				<a href="/contact/">Посмотреть на карте</a>
+			</span>
+                                </li>
+                                <br>
+                                <li class="icon phone">
+                                    <i></i>
+                                    <span><span>(343)</span><strong> 362-29-00</strong></span>
+                                </li>
+                            </ul>
+                        </div>
+                    </section>
                 </aside>
                 <div id="center">
                     {% block content %}

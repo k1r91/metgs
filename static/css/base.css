@@ -577,10 +577,6 @@ aside .box .inner {
 }
 
 #center .box > .title {
-    background: url(../images/carrot/title1.png) no-repeat center 0;
-}
-
-#center .box > .title {
     background: url(../pic/title1.png) no-repeat center 0;
     height: 40px;
     text-align: center;
@@ -608,7 +604,7 @@ aside .box .inner {
 }
 
 .main-catalog > .item {
-    min-height: 250px;
+    min-height: 100px;
 }
 
 .oh, .ot, .tt {
@@ -631,4 +627,24 @@ img {
     border: 0;
     -ms-interpolation-mode: bicubic;
     vertical-align: middle;
+}
+
+#center .label.label-styled {
+    font-size: 16px;
+}
+
+.news .item .txt a, #center .news .item .txt a {
+    display: block;
+    font-size: 12px;
+    line-height: 18px;
+    color: #0099cc;
+}
+
+.box.news .inner {
+    padding: 10px;
+}
+
+#center .box.unstyled, aside .box.unstyled {
+    background: none;
+    border: none;
 }

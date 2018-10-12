@@ -25,6 +25,7 @@ class Organization(models.Model):
     footer_desc = models.TextField(blank=True, null=True, verbose_name="Описание в футере")
     footer_phone = models.CharField(max_length=64, blank=True, null=True, verbose_name="Телефон в футере")
     name = models.CharField(max_length=64, blank=True, null=True, verbose_name="Наименование")
+    main_page_desc = HTMLField(blank=True, null=True, verbose_name="Текст внизу на главной странице")
 
 
 class Category(models.Model):

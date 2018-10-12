@@ -59,7 +59,7 @@
             <span>Каталог</span>
         </div>
         <div class="inner main-catalog">
-            {% for cat in categories %}
+            {% for cat in show_categories %}
 
                 <div class="oh item">
                     <div class="oh">
@@ -76,7 +76,36 @@
                     </div>
                 </div>
             {% endfor %}
+            <a href="/catalogue/" style="float:right;">весь каталог</a>
             <div class="cl"></div>
+        </div>
+    </div>
+    <div class="box news">
+        <div class="title">
+            <span><a href="/news/" style="color:inherit;">Новости</a></span>
+        </div>
+        <div class="inner">
+            <div class="news">
+                <div class="item">
+                    <div class="txt">
+                        <div class="date"><span class="label label-styled">{{ news.date|date:'d.m.Y' }}</span></div>
+                        <a href="/news/{{ news.id }}/">{{ news.name }}</a>
+                        <div class="desc">{{ news.desc|safe }}</div>
+                    </div>
+                </div>
+                <hr class="double dotted">
+            </div><!--news -->
+            <div class="lt"></div>
+            <div class="rt"></div>
+        </div>
+        <div class="rb"></div>
+        <div class="lb"></div>
+    </div>
+    <div class="box unstyled">
+        <div class="inner">
+            <div class="padd">
+                {{ organization.main_page_desc|safe }}
+            </div>
         </div>
     </div>
 {% endblock %}
