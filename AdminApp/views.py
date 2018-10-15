@@ -8,7 +8,6 @@ from django.template import loader
 from django.core.paginator import Paginator, EmptyPage, PageNotAnInteger
 from django.template.context_processors import csrf
 from django.core.exceptions import ObjectDoesNotExist
-from django.core.files.images import ImageFile
 
 from AdminApp.forms import UserEditFrom, CategoryForm, GoodForm, TopMenuForm, PhotoAlbumForm, PriceForm, NewsForm, \
     OrganizationForm, ContactForm

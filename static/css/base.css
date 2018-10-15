@@ -263,7 +263,7 @@ div#header-card {
     position: relative;
 }
 
-.cart_box {
+.box.cart_box {
     background: url("../pic/bg_cart.png") no-repeat 0 0;
     padding-top: 10px;
     font-size: 12px;
@@ -660,4 +660,69 @@ element.style {
 div.main_menu a.active {
     text-decoration: underline;
     color: #66afe9;
+}
+
+.full_box {
+    margin: 0 -14px 0 -20px;
+    padding: 6px 10px 6px 20px;
+    background: none;
+}
+
+.navi {
+    background: #F1F1F1;
+    border-top: 1px solid #dcdee5;
+    padding: 3px 0px;
+    text-align: center;
+}
+
+ul.breadcrumbs, ul.breadcrumbs li {
+    list-style: none;
+    margin: 0;
+    color: #09C;
+}
+
+#center .breadcrumbs a {
+    color: #00a5bb;
+}
+
+#center .breadcrumbs a.active {
+    color: #de1b0c;
+}
+
+#center .box .inner {
+    padding: 0;
+}
+
+#center .box .inner .padd {
+    padding-left: 0;
+}
+
+.box .inner .padd {
+    overflow: hidden;
+}
+
+.padd {
+    padding: 15px 2% 10px 3%;
+}
+
+.contact-page {
+    padding-left: 20px;
+    margin-top: 20px;
+}
+
+.feedback-form {
+    margin-top: 0;
+    width: 300px;
+    -webkit-box-shadow: 3px 7px 6px rgba(50, 50, 50, 0.12) inset;
+    -moz-box-shadow: 3px 7px 6px rgba(50, 50, 50, 0.12) inset;
+     -webkit-transition: border linear 0.2s,box-shadow linear 0.2s;
+    -moz-transition: border linear 0.2s, box-shadow linear 0.2s;
+    -ms-transition: border linear 0.2s, box-shadow linear 0.2s;
+    -o-transition: border linear 0.2s, box-shadow linear 0.2s;
+    border: 1px solid #cccccc;
+     transition: border linear 0.2s,box-shadow linear 0.2s;
+     -webkit-border-radius: 15px;
+    -moz-border-radius: 15px;
+     border-radius: 15px;
+    padding: 5px 10px;
 }

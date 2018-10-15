@@ -1,4 +1,35 @@
 {% extends 'base.html' %}
 {% load staticfiles %}
 {% block content %}
+    {% for obj in objects %}
+        <div class="obj-item">
+            <span style="font-size: 12px;" class="label label-styled">{{ obj.date|date:'d.m.Y' }}</span> <br/>
+            <h4><a href="/news/{{ obj.id }}/">{{ obj.name }}</a></h4>
+            <div class="obj-content">
+                {{ obj.desc|safe }}
+            </div>
+        </div>
+        <div class="navi full_box"></div>
+    {% endfor %}
+    <div class="pagination">
+         <span class="step-links">
+                                        <a {% if objects.has_previous %}
+                                            href="?page={{ objects.previous_page_number }}"
+                                        {% else %}
+                                            href="#" class="disabled"
+                                        {% endif %}>
+                                                <span class="glyphicon glyphicon-circle-arrow-left"></span>
+                                            </a>
+                                    <span class="current">
+                                        Страница {{ objects.number }} из {{ objects.paginator.num_pages }}
+                                    </span>
+                                        <a{% if objects.has_next %}
+                                            href="?page={{ objects.next_page_number }}"
+                                        {% else %}
+                                            href="#" class="disabled"
+                                        {% endif %}>
+                                            <span class="glyphicon glyphicon-circle-arrow-right"></span>
+                                        </a>
+         </span>
+    </div>
 {% endblock %}

@@ -25,17 +25,17 @@ urlpatterns = [
     # path('admin/', admin.site.urls),
     path('', index),
     path('news/', news),
+    path('news/<_id>/', news_detail),
     path('catalogue/', catalogue),
     path('price/', price),
     path('gallery/', gallery),
     path('about/', about),
-    path('technocad/', technocad),
     path('contact/', contact),
-    path('<default>/', default),
     path('user/', include('UserManagementApp.urls')),
     path('admin/', include('AdminApp.urls')),
     path('tinymce/', include('tinymce.urls')),
     re_path(r'^tinymce/', include('tinymce.urls')),
+    path('<default>/', default),
 ]
 
 if settings.DEBUG:

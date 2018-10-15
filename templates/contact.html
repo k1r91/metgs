@@ -1,4 +1,46 @@
 {% extends 'base.html' %}
 {% load staticfiles %}
 {% block content %}
+    <div class="box unstyled">
+        <div class="inner">
+            <div class="padd">
+                <div class="header-sect"><h2>Контакты</h2></div>
+                <div class="contact-page">
+                    {% for place in places %}
+                        <div class="contact-item">
+                            <h4>{{ place.name }}</h4>
+                            <div class="contact-address">
+                                <span class="glyphicon glyphicon-home"></span>&nbsp;&nbsp;{{ place.address }} <br/>
+                                <span class="glyphicon glyphicon-phone"></span>&nbsp;&nbsp;{{ place.phone }} <br/>
+                                {{ place.map | safe }}
+                            </div>
+                        </div>
+                    {% endfor %}
+                    {% for people in peoples %}
+                        <div class="contact-item">
+                            <h4><b>{{ people.position }}</b></h4>
+                            <h5>{{ people.name }}</h5>
+                            {% if people.phone %}<span class="glyphicon glyphicon-phone"></span>&nbsp;&nbsp;
+                                {{ people.phone }} <br/>
+                            {% endif %}
+                        </div>
+                    {% endfor %}
+                </div>
+                <h3><b>Форма обратной связи</b></h3>
+                <form action="/feedback/">
+                    {% csrf_token %}
+                    <label for="input-name">Ваше имя *</label><br/>
+                    <input class="feedback-form" required="required" id="input-name" type="text"/> <br/>
+                    <label for="input-contact">Контакты</label><br/>
+                    <input class="feedback-form" id="input-contact" type="text"/> <br/>
+                    <label for="input-text">Текст обращения *</label><br/>
+                    <textarea class="feedback-form" id="input-text" required="required" type="textarea"></textarea>
+                    <script src='https://www.google.com/recaptcha/api.js'></script>
+                    <div class="g-recaptcha" data-sitekey="6Lcq-XQUAAAAAL4ESacACWbWkcA7G3vPtw122f52"></div>
+                    <br/>
+                    <input type="submit" class="btn btn-primary" value="Отправить"/>
+                </form>
+            </div>
+        </div>
+    </div>
 {% endblock %}

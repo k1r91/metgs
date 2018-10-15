@@ -188,6 +188,15 @@
                     </section>
                 </aside>
                 <div id="center">
+                    {% block breadcrumbs %}
+                        <div class="breadcrumbs">
+                            {% for crumb in breadcrumbs %}
+                                <a href="{{ crumb.href }}"
+                                   {% if forloop.counter == breadcrumbs|length %}class="active"{% endif %}>{{ crumb.name|capfirst }}</a>
+                                {% if forloop.counter != breadcrumbs|length %}&gt;{% endif %}
+                            {% endfor %}
+                        </div>
+                    {% endblock %}
                     {% block content %}
                     {% endblock %}
                 </div>

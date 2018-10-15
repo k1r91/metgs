@@ -1,0 +1,9 @@
+{% extends 'base.html' %}
+{% load staticfiles %}
+{% block content %}
+    <span style="font-size: 12px;" class="label label-styled">{{ obj.date|date:'d.m.Y' }}</span> <br/>
+    <h1>{{ obj.name }}</h1>
+    <div class="obj-content">
+        {{ obj.desc|safe }}
+    </div>
+{% endblock %}
