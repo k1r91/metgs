@@ -87,3 +87,11 @@ class Contact(models.Model):
     phone = models.CharField(max_length=64, blank=True, null=True, verbose_name="Телефон")
     address = models.TextField(verbose_name="Адрес", blank=True, null=True)
     position = models.CharField(max_length=64, verbose_name="Должность", blank=True, null=True)
+
+
+class Comment(models.Model):
+    name = models.CharField(max_length=256, verbose_name="Ваше имя*")
+    contacts = models.CharField(max_length=256, verbose_name="Контакты")
+    
+
+

@@ -31,6 +31,7 @@ urlpatterns = [
     path('gallery/', gallery),
     path('about/', about),
     path('contact/', contact),
+    path('feedback/', feedback),
     path('user/', include('UserManagementApp.urls')),
     path('admin/', include('AdminApp.urls')),
     path('tinymce/', include('tinymce.urls')),

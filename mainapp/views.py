@@ -111,3 +111,8 @@ def default(request, default):
     context['page'] = default
     context['breadcrumbs'].append(BreadCrumb(menu.name, menu.slug))
     return render(request, 'default.html', context)
+
+
+def feedback(request):
+    if request.method == 'POST':
+        context = get_common_context()
