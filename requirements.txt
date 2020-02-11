@@ -12,7 +12,7 @@ checkbox-support==0.22
 command-not-found==0.3
 cryptography==2.3.1
 defer==1.0.6
-Django==2.1
+Django==2.2.10
 django-tinymce==2.7.0
 Fabric3==1.14.post1
 feedparser==5.1.3
